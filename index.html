@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Art Today!</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Lato', sans-serif; background: #fff; color: #000; line-height: 1.8; }
+        img { max-width: 100%; height: auto; display: block; }
+        a { text-decoration: none; color: inherit; }
+
+        header {
+            background: #000;
+            color: #c9a96e; /* Gold */
+            padding: 1.5rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; letter-spacing: 2px; }
+        nav ul { list-style: none; display: flex; gap: 2.5rem; }
+        nav a { color: #c9a96e; font-size: 1.2rem; transition: color 0.3s; }
+        nav a:hover { color: #fff; }
+        .menu-toggle { display: none; cursor: pointer; font-size: 1.8rem; color: #c9a96e; }
+
+        .hero {
+            margin-top: 80px;
+            height: 90vh;
+            background: url('https://pbs.twimg.com/media/Fe6C4DhWIAA6x60.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: flex-end;
+            padding: 8% 5%;
+            color: #fff;
+            text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+        }
+        .hero-content { max-width: 700px; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: 4rem; margin-bottom: 1.5rem; }
+        .hero p { font-size: 1.4rem; font-style: italic; }
+
+        main { padding: 6rem 5%; max-width: 1400px; margin: 0 auto; }
+        .section-title { font-family: 'Playfair Display', serif; font-size: 3rem; text-align: center; margin-bottom: 4rem; color: #c9a96e; letter-spacing: 1px; }
+
+        .articles {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+        }
+        .article-card {
+            background: #fff;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            transition: transform 0.4s ease;
+            animation: geometricFade 1.5s ease-out forwards;
+            opacity: 0;
+        }
+        .article-card:nth-child(odd) { animation-delay: 0.2s; }
+        .article-card:nth-child(even) { animation-delay: 0.4s; }
+        .article-card:hover { transform: scale(1.02); }
+        .article-img { height: 400px; object-fit: cover; }
+        .article-content { padding: 2rem; text-align: center; }
+        .article-content h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.8rem; color: #000; }
+        .article-meta { font-size: 1rem; color: #555; margin-bottom: 1.2rem; font-style: italic; }
+
+        @keyframes geometricFade {
+            0% { opacity: 0; transform: translateY(20px) rotate(1deg); }
+            100% { opacity: 1; transform: translateY(0) rotate(0deg); }
+        }
+
+        .artist-intro { text-align: center; max-width: 900px; margin: 0 auto 4rem; font-size: 1.2rem; color: #333; }
+        .artist-intro a { color: #c9a96e; transition: color 0.3s; }
+        .artist-intro a:hover { color: #000; }
+
+        footer {
+            background: #000;
+            color: #c9a96e;
+            text-align: center;
+            padding: 4rem 5%;
+            margin-top: 6rem;
+        }
+        footer a { color: #c9a96e; margin: 0 1.2rem; transition: color 0.3s; }
+        footer a:hover { color: #fff; }
+
+        @media (max-width: 768px) {
+            nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #000; padding: 1.5rem; }
+            nav ul.active { display: flex; }
+            .menu-toggle { display: block; }
+            .hero h1 { font-size: 2.8rem; }
+            .articles { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">Art Today!</div>
+        <nav>
+            <ul id="nav-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Features</a></li>
+                <li><a href="#">Artists</a></li>
+                <li><a href="#">Exhibitions</a></li>
+                <li><a href="#">About</a></li>
+                <li><a href="#">Contact</a></li>
+            </ul>
+            <div class="menu-toggle" id="menu-toggle">☰</div>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Skorcheart: Journeys of the Soul</h1>
+            <p>An exclusive immersion into realms of profound emotion and transformative experiences.</p>
+        </div>
+    </section>
+
+    <main>
+        <h2 class="section-title">Featured Artist: Skorcheart</h2>
+        <div class="artist-intro">
+            <p>In the hushed sanctuaries of creation, where passion intertwines with perseverance, Skorcheart—known to the enlightened as Ryan Eusantos—stands as a beacon of unyielding devotion. Through decades of tireless exploration, he has navigated the depths of the human spirit, channeling sleepless nights into visions that resonate with the heart's unspoken truths. Emerging from authentic roots, his creations have captivated galleries with their raw sincerity, yet he has turned away fortunes to preserve the sanctity of his expression. In this moment of revelation, Skorcheart extends an invitation to partake in his odyssey, offering pieces that stir the soul for the sheer joy of shared connection. Witness these masterpieces, unveiled in exquisite detail, as they awaken every emotion within and guide you through the eternal journey of existence. Art credits include exhibitions at Pain Sugar Gallery (e.g., Fall Group Show and Kabilang Mundo) and collaborative triumphs like 'Last Goodbye'. Follow more of his work on Instagram at <a href="https://www.instagram.com/skorcheart/" target="_blank">@skorcheart</a>.</p>
+        </div>
+        <div class="articles">
+            <!-- Organized Most Appealing to Least -->
+            <article class="article-card">
+                <img src="https://cdn.myportfolio.com/2b2b96fe-0be2-484a-8fae-ba35481d9a18/baef77d6-7283-40bb-a4fc-28303debc8b4_rwc_1132x1976x1547x1210x1547.jpg?h=28b88459991636d977e335ffaad69fc8" alt="Skorcheart abstract colorful landscape" class="article-img">
+                <div class="article-content">
+                    <h3>Enchanted Strata</h3>
+                    <p class="article-meta">Oil on canvas, dimensions unknown, circa 2021. Courtesy of the artist. No caption – From 'Last Goodbye' exhibition – Link: https://curatedchronicles.com/last-goodbye-x-ryan-eusantos-steve-rubio.</p>
+                    <p>This canvas unfolds layers of joy and serenity, inviting the viewer to traverse paths of renewal and inner harmony, where each hue whispers tales of growth and boundless possibility.</p>
+                </div>
+            </article>
+            <article class="article-card">
+                <img src="https://cdn.myportfolio.com/2b2b96fe-0be2-484a-8fae-ba35481d9a18/4934beeb-e616-4f98-9a25-67f46da93a56_rw_3840.JPG?h=031a906ec4743068c452fb22fc28759c" alt="Skorcheart vibrant abstract" class="article-img">
+                <div class="article-content">
+                    <h3>Chromatic Echoes</h3>
+                    <p class="article-meta">Oil on canvas, dimensions unknown, circa 2021. Courtesy of the artist. No caption – From 'Last Goodbye' exhibition – Link: https://curatedchronicles.com/last-goodbye-x-ryan-eusantos-steve-rubio.</p>
+                    <p>A symphony of vibrancy that stirs exhilaration and wonder, charting a voyage through moments of pure elation and the vibrant pulse of life's unending rhythm.</p>
+                </div>
+            </article>
+            <article class="article-card">
+                <img src="https://cdn.myportfolio.com/2b2b96fe-0be2-484a-8fae-ba35481d9a18/6c1f4441-eea3-4f0b-95b5-60d9a3203d03_rw_3840.JPG?h=69949a18d39be11bfeb5ad1cc8b3fc66" alt="Skorcheart ethereal portrait" class="article-img">
+                <div class="article-content">
+                    <h3>Ethereal Reverie</h3>
+                    <p class="article-meta">Oil on canvas, dimensions unknown, circa 2021. Courtesy of the artist. No caption – From 'Last Goodbye' exhibition – Link: https://curatedchronicles.com/last-goodbye-x-ryan-eusantos-steve-rubio.</p>
+                    <p>This portrait evokes tender vulnerability and quiet strength, leading one on a reflective path of empathy and connection, where emotions surface like gentle waves of understanding.</p>
+                </div>
+            </article>
+            <article class="article-card">
+                <img src="https://cdn.myportfolio.com/2b2b96fe-0be2-484a-8fae-ba35481d9a18/5044b09d-77a5-4873-8d45-1e9c9d7ca0f2_rw_3840.JPG?h=af780f82d9d8aa3d76f7d36bea547c81" alt="Skorcheart gallery portrait" class="article-img">
+                <div class="article-content">
+                    <h3>Whispers of Farewell</h3>
+                    <p class="article-meta">Oil on canvas, dimensions unknown, circa 2021. Courtesy of the artist. No caption – From 'Last Goodbye' exhibition – Link: https://curatedchronicles.com/last-goodbye-x-ryan-eusantos-steve-rubio.</p>
+                    <p>An intimate glimpse that awakens melancholy and hope, guiding through the bittersweet farewell to cherished memories and the embrace of new beginnings.</p>
+                </div>
+            </article>
+            <article class="article-card">
+                <img src="https://cdn.myportfolio.com/2b2b96fe-0be2-484a-8fae-ba35481d9a18/c616bd99-1150-44d8-ab26-f5e30af9273b_rw_1920.jpg?h=a290df91eb4995fd6b1a902e94ee16e0" alt="Skorcheart exhibition poster art" class="article-img">
+                <div class="article-content">
+                    <h3>Last Embrace</h3>
+                    <p class="article-meta">Oil on canvas, dimensions unknown, circa 2021. Courtesy of the artist. No caption – From 'Last Goodbye' exhibition – Link: https://curatedchronicles.com/last-goodbye-x-ryan-eusantos-steve-rubio.</p>
+                    <p>Scenes of warmth and parting that ignite feelings of love and loss, tracing the delicate threads of human bonds and the enduring spirit of affection.</p>
+                </div>
+            </article>
+            <article class="article-card">
+                <img src="https://cdn.myportfolio.com/2b2b96fe-0be2-484a-8fae-ba35481d9a18/6b9f5226-ea8d-43e6-9001-3b3b30385462_rwc_343x835x1081x845x1081.jpg?h=5ad4bb1ff375a8dae58621cf5738152a" alt="Skorcheart abstract installation" class="article-img">
+                <div class="article-content">
+                    <h3>Fragmented Horizons</h3>
+                    <p class="article-meta">Oil on canvas, dimensions unknown, circa 2021. Courtesy of the artist. No caption – From 'Last Goodbye' exhibition – Link: https://curatedchronicles.com/last-goodbye-x-ryan-eusantos-steve-rubio.</p>
+                    <p>Forms that convey fragmentation and unity, embarking on a quest through confusion toward clarity, awakening resilience amid life's shifting landscapes.</p>
+                </div>
+            </article>
+            <article class="article-card">
+                <img src="https://pbs.twimg.com/media/Fe6C4DhWIAA6x60.jpg" alt="Skorcheart landscape artwork" class="article-img">
+                <div class="article-content">
+                    <h3>Neon Metropolis</h3>
+                    <p class="article-meta">Digital illustration, 1920x1080 px, circa 2022. Courtesy of the artist. No caption – Posted circa November 2022 – Link via @skorcheart on X.</p>
+                    <p>This vision stirs a profound sense of mystery and revelation, journeying through shadowed doubts to luminous insights that touch the core of existence.</p>
+                </div>
+            </article>
+            <article class="article-card">
+                <img src="https://pbs.twimg.com/media/FZuuogOXgAEiZGe?format=jpg&name=large" alt="Skorcheart landscape scene" class="article-img">
+                <div class="article-content">
+                    <h3>Epic Landscape</h3>
+                    <p class="article-meta">Digital illustration, 1920x1080 px, circa 2022. Courtesy of the artist. No caption – Posted circa August 2022 – Link via @skorcheart on X.</p>
+                    <p>A panorama that evokes awe and introspection, leading through vast expanses of solitude to moments of profound self-discovery and emotional liberation.</p>
+                </div>
+            </article>
+            <article class="article-card">
+                <img src="https://pbs.twimg.com/media/FcWtZiyaQAAFcPv.jpg" alt="Skorcheart horizon artwork" class="article-img">
+                <div class="article-content">
+                    <h3>Horizon Beyond</h3>
+                    <p class="article-meta">Digital illustration, 1920x1080 px, circa 2022. Courtesy of the artist. No caption – Posted circa September 2022 – Link via @skorcheart on X.</p>
+                    <p>Intensities that summon passion and contemplation, navigating the tides of fervor to serene acceptance in the grand narrative of personal evolution.</p>
+                </div>
+            </article>
+            <article class="article-card">
+                <img src="https://pbs.twimg.com/media/FRm14g5UYAAiYhd.jpg" alt="Skorcheart moon knight artwork" class="article-img">
+                <div class="article-content">
+                    <h3>Moon Knight Studies</h3>
+                    <p class="article-meta">Digital illustration, 1920x1080 px, circa 2022. Courtesy of the artist. Caption: "@moonknight @Marvel @Disney hire me pls" – Posted circa April 2022 – Link via @skorcheart on X.</p>
+                    <p>Sketches that awaken conflict and resolution, traversing inner battles to harmonious peace, revealing the multifaceted layers of the human psyche.</p>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Art Today! All rights reserved.</p>
+        <div>
+            <a href="#">Instagram</a> |
+            <a href="#">X</a> |
+            <a href="#">Subscribe</a>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menu-toggle');
+        const navMenu = document.getElementById('nav-menu');
+        menuToggle.addEventListener('click', () => {
+            navMenu.classList.toggle('active');
+        });
+    </script>
+</body>
+</html>
