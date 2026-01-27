@@ -3,227 +3,2078 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Art Today!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
+    <title>Direct Protection Security | ADT Authorized Dealer - Premium Smart Home Security</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Lato', sans-serif; background: #fff; color: #000; line-height: 1.8; }
-        img { max-width: 100%; height: auto; display: block; }
-        a { text-decoration: none; color: inherit; }
-
-        header {
-            background: #000;
-            color: #c9a96e; /* Gold */
-            padding: 1.5rem 5%;
-            position: fixed;
-            width: 100%;
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        :root {
+            --adt-blue: #0057b8;
+            --adt-dark-blue: #003d82;
+            --accent-cyan: #06b6d4;
+            --bg-dark: #0a0e1a;
+            --bg-darker: #050810;
+        }
+        
+        body {
+            background: var(--bg-darker);
+            overflow-x: hidden;
+            color: white;
+        }
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* Layout */
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+        
+        .grid {
+            display: grid;
+            gap: 32px;
+        }
+        
+        .grid-2 {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        
+        .grid-3 {
+            grid-template-columns: repeat(3, 1fr);
+        }
+        
+        .grid-4 {
+            grid-template-columns: repeat(4, 1fr);
+        }
+        
+        @media (max-width: 1024px) {
+            .grid-3 { grid-template-columns: repeat(2, 1fr); }
+            .grid-4 { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+        }
+        
+        /* Hero Gradient Background */
+        .hero-gradient {
+            background: linear-gradient(135deg, #0a0e1a 0%, #1a1f35 50%, #0a0e1a 100%);
+            position: relative;
+        }
+        
+        .hero-gradient::before {
+            content: '';
+            position: absolute;
             top: 0;
-            z-index: 1000;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(0, 87, 184, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        /* Glass Morphism */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .glass-strong {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 50;
+            transition: all 0.3s;
+        }
+        
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            padding: 16px 24px;
         }
-        .logo { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; letter-spacing: 2px; }
-        nav ul { list-style: none; display: flex; gap: 2.5rem; }
-        nav a { color: #c9a96e; font-size: 1.2rem; transition: color 0.3s; }
-        nav a:hover { color: #fff; }
-        .menu-toggle { display: none; cursor: pointer; font-size: 1.8rem; color: #c9a96e; }
-
-        .hero {
-            margin-top: 80px;
-            height: 90vh;
-            background: url('https://pbs.twimg.com/media/Fe6C4DhWIAA6x60.jpg') center/cover no-repeat;
+        
+        .logo-container {
             display: flex;
-            align-items: flex-end;
-            padding: 8% 5%;
-            color: #fff;
-            text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+            align-items: center;
+            gap: 16px;
         }
-        .hero-content { max-width: 700px; }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: 4rem; margin-bottom: 1.5rem; }
-        .hero p { font-size: 1.4rem; font-style: italic; }
-
-        main { padding: 6rem 5%; max-width: 1400px; margin: 0 auto; }
-        .section-title { font-family: 'Playfair Display', serif; font-size: 3rem; text-align: center; margin-bottom: 4rem; color: #c9a96e; letter-spacing: 1px; }
-
-        .articles {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-            gap: 3rem;
+        
+        .logo-text {
+            font-size: 20px;
+            font-weight: 700;
         }
-        .article-card {
-            background: #fff;
-            overflow: hidden;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
-            transition: transform 0.4s ease;
-            animation: geometricFade 1.5s ease-out forwards;
-            opacity: 0;
+        
+        .logo-subtext {
+            font-size: 12px;
+            color: #9ca3af;
         }
-        .article-card:nth-child(odd) { animation-delay: 0.2s; }
-        .article-card:nth-child(even) { animation-delay: 0.4s; }
-        .article-card:hover { transform: scale(1.02); }
-        .article-img { height: 400px; object-fit: cover; }
-        .article-content { padding: 2rem; text-align: center; }
-        .article-content h3 { font-family: 'Playfair Display', serif; font-size: 1.8rem; margin-bottom: 0.8rem; color: #000; }
-        .article-meta { font-size: 1rem; color: #555; margin-bottom: 1.2rem; font-style: italic; }
-
-        @keyframes geometricFade {
-            0% { opacity: 0; transform: translateY(20px) rotate(1deg); }
-            100% { opacity: 1; transform: translateY(0) rotate(0deg); }
+        
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 32px;
         }
-
-        .artist-intro { text-align: center; max-width: 900px; margin: 0 auto 4rem; font-size: 1.2rem; color: #333; }
-        .artist-intro a { color: #c9a96e; transition: color 0.3s; }
-        .artist-intro a:hover { color: #000; }
-
-        footer {
-            background: #000;
-            color: #c9a96e;
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: var(--accent-cyan);
+        }
+        
+        /* Buttons */
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            border-radius: 12px;
+            font-weight: 700;
+            text-decoration: none;
             text-align: center;
-            padding: 4rem 5%;
-            margin-top: 6rem;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
         }
-        footer a { color: #c9a96e; margin: 0 1.2rem; transition: color 0.3s; }
-        footer a:hover { color: #fff; }
-
+        
+        .btn-premium {
+            position: relative;
+            background: linear-gradient(135deg, var(--adt-blue), var(--accent-cyan));
+            color: white;
+            overflow: hidden;
+        }
+        
+        .btn-premium::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+        
+        .btn-premium:hover::before {
+            left: 100%;
+        }
+        
+        .btn-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 20px 40px rgba(0, 87, 184, 0.4);
+        }
+        
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(30px);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(0, 87, 184, 0.3); }
+            50% { box-shadow: 0 0 40px rgba(6, 182, 212, 0.5); }
+        }
+        
+        .animate-fadeInUp {
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+        
+        .animate-glow {
+            animation: glow 3s ease-in-out infinite;
+        }
+        
+        /* Gradient Text */
+        .gradient-text {
+            background: linear-gradient(135deg, #fff 0%, var(--accent-cyan) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 9999px;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        /* Cards */
+        .card {
+            border-radius: 24px;
+            padding: 48px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 87, 184, 0.2);
+        }
+        
+        .card-popular {
+            border: 2px solid var(--accent-cyan);
+            position: relative;
+        }
+        
+        .card-popular::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--adt-blue), var(--accent-cyan));
+            padding: 8px 24px;
+            border-radius: 9999px;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+        }
+        
+        /* Sections */
+        section {
+            padding: 80px 24px;
+        }
+        
+        .section-title {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 16px;
+            text-align: center;
+        }
+        
+        .section-subtitle {
+            font-size: 20px;
+            color: #9ca3af;
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto 64px;
+        }
+        
+        /* Video Container */
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 20px;
+            background: #000;
+        }
+        
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+        
+        /* Video Card */
+        .video-card {
+            border-radius: 24px;
+            padding: 24px;
+            margin-bottom: 32px;
+        }
+        
+        .video-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        /* Stats */
+        .stat-item {
+            text-align: center;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+        
+        .stat-number {
+            font-size: 48px;
+            font-weight: 900;
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            color: #9ca3af;
+        }
+        
+        /* Feature List */
+        .feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 24px 0;
+        }
+        
+        .feature-list li {
+            display: flex;
+            align-items: start;
+            gap: 12px;
+            margin: 16px 0;
+        }
+        
+        .feature-list .checkmark {
+            color: var(--accent-cyan);
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        /* Price Display */
+        .price {
+            font-size: 48px;
+            font-weight: 900;
+            margin: 24px 0;
+        }
+        
+        .price-period {
+            font-size: 16px;
+            color: #9ca3af;
+            font-weight: 400;
+        }
+        
+        /* Form Elements */
+        input, select, textarea {
+            width: 100%;
+            padding: 16px;
+            border: 2px solid #374151;
+            border-radius: 12px;
+            font-size: 16px;
+            background: rgba(0, 0, 0, 0.3);
+            color: white;
+            transition: all 0.3s;
+        }
+        
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--accent-cyan);
+            box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.1);
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #d1d5db;
+            font-size: 14px;
+        }
+        
+        .form-group {
+            margin-bottom: 24px;
+        }
+        
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 16px;
+        }
+        
+        .modal.active {
+            display: flex;
+        }
+        
+        .modal-content {
+            border-radius: 24px;
+            padding: 48px;
+            max-width: 500px;
+            width: 100%;
+        }
+        
+        /* Dashboard */
+        .dashboard-header {
+            background: linear-gradient(135deg, #1e40af, #0891b2);
+            padding: 32px 24px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+        
+        .dashboard-header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .dashboard-title {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        /* Tabs */
+        .tabs {
+            display: flex;
+            gap: 16px;
+            margin-bottom: 32px;
+            border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .tab {
+            padding: 16px 32px;
+            background: transparent;
+            border: none;
+            color: #9ca3af;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+            margin-bottom: -2px;
+        }
+        
+        .tab.active {
+            color: var(--accent-cyan);
+            border-bottom-color: var(--accent-cyan);
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        /* Product Catalog */
+        .product-category {
+            margin-bottom: 32px;
+        }
+        
+        .category-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid rgba(6, 182, 212, 0.3);
+        }
+        
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 16px;
+        }
+        
+        .product-item {
+            background: rgba(30, 58, 138, 0.2);
+            border: 2px solid #374151;
+            border-radius: 12px;
+            padding: 16px;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        
+        .product-item:hover {
+            border-color: var(--accent-cyan);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(6, 182, 212, 0.2);
+        }
+        
+        .product-item.selected {
+            border-color: var(--accent-cyan);
+            background: rgba(6, 182, 212, 0.2);
+            box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+        }
+        
+        .product-name {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #fff;
+        }
+        
+        .product-price {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-cyan);
+            margin-bottom: 8px;
+        }
+        
+        .product-quantity {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        
+        .product-quantity button {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            border: 2px solid var(--accent-cyan);
+            background: transparent;
+            color: var(--accent-cyan);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .product-quantity button:hover {
+            background: var(--accent-cyan);
+            color: white;
+        }
+        
+        .product-quantity input {
+            width: 60px;
+            text-align: center;
+            padding: 8px;
+            font-weight: 700;
+        }
+        
+        /* Results Panel */
+        .result-display {
+            background: linear-gradient(135deg, var(--adt-blue), var(--accent-cyan));
+            border-radius: 16px;
+            padding: 32px;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .result-item {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px;
+            margin: 12px 0;
+            text-align: center;
+        }
+        
+        .result-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .result-value {
+            font-size: 28px;
+            font-weight: 700;
+        }
+        
+        .net-commission {
+            background: rgba(34, 197, 94, 0.3);
+            border: 2px solid #22c55e;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            margin-top: 16px;
+        }
+        
+        .expense-breakdown {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-top: 16px;
+            font-size: 13px;
+        }
+        
+        .expense-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .expense-total {
+            display: flex;
+            justify-content: space-between;
+            padding: 12px 0;
+            border-top: 2px solid rgba(255, 255, 255, 0.3);
+            margin-top: 8px;
+            font-weight: 700;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            font-size: 28px;
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+        }
+        
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 280px;
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            z-index: 40;
+            padding: 96px 24px 24px;
+        }
+        
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        .mobile-menu a {
+            display: block;
+            padding: 16px 0;
+            color: white;
+            text-decoration: none;
+        }
+        
+        /* Cart Summary */
+        .cart-summary {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 13px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
         @media (max-width: 768px) {
-            nav ul { display: none; flex-direction: column; position: absolute; top: 100%; left: 0; width: 100%; background: #000; padding: 1.5rem; }
-            nav ul.active { display: flex; }
-            .menu-toggle { display: block; }
-            .hero h1 { font-size: 2.8rem; }
-            .articles { grid-template-columns: 1fr; }
+            nav { display: none; }
+            .mobile-menu-btn { display: block; }
+            .section-title { font-size: 32px; }
+            .dashboard-title { font-size: 28px; }
+            .product-grid {
+                grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            }
+        }
+        
+        /* Footer */
+        footer {
+            padding: 64px 24px;
+            border-top: 1px solid #374151;
+        }
+        
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 32px;
+            margin-bottom: 32px;
+        }
+        
+        @media (max-width: 768px) {
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .footer-title {
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin: 8px 0;
+        }
+        
+        .footer-links a {
+            color: #9ca3af;
+            text-decoration: none;
+            font-size: 14px;
+            transition: color 0.3s;
+        }
+        
+        .footer-links a:hover {
+            color: var(--accent-cyan);
+        }
+        
+        .footer-bottom {
+            border-top: 1px solid #374151;
+            padding-top: 32px;
+            text-align: center;
+            font-size: 14px;
+            color: #9ca3af;
+        }
+        
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--bg-darker);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: var(--adt-blue);
+            border-radius: 5px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--accent-cyan);
+        }
+        
+        .tech-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+        
+        .tech-card {
+            border-radius: 24px;
+            padding: 32px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 30px 60px rgba(0, 87, 184, 0.2);
+        }
+        
+        .tech-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+        
+        .tech-description {
+            color: #9ca3af;
+            line-height: 1.6;
         }
     </style>
 </head>
 <body>
 
-    <header>
-        <div class="logo">Art Today!</div>
-        <nav>
-            <ul id="nav-menu">
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Features</a></li>
-                <li><a href="#">Artists</a></li>
-                <li><a href="#">Exhibitions</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-            <div class="menu-toggle" id="menu-toggle">☰</div>
-        </nav>
+    <!-- Header -->
+    <header id="header">
+        <div class="glass-strong">
+            <div class="container">
+                <div class="header-content">
+                    <!-- Logo -->
+                    <div class="logo-container">
+                        <svg width="48" height="48" viewBox="0 0 50 50" fill="none">
+                            <circle cx="25" cy="25" r="23" stroke="url(#gradient)" stroke-width="2"/>
+                            <path d="M25 10 L25 25 L35 25" stroke="url(#gradient)" stroke-width="2.5" stroke-linecap="round"/>
+                            <defs>
+                                <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                                    <stop offset="0%" style="stop-color:#0057b8"/>
+                                    <stop offset="100%" style="stop-color:#06b6d4"/>
+                                </linearGradient>
+                            </defs>
+                        </svg>
+                        <div>
+                            <div class="logo-text gradient-text">Direct Protection Security</div>
+                            <div class="logo-subtext">ADT Authorized Dealer</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Desktop Navigation -->
+                    <nav>
+                        <a href="#home">Home</a>
+                        <a href="#packages">Packages</a>
+                        <a href="#technology">Technology</a>
+                        <a href="#contact">Contact</a>
+                        <button onclick="showLogin()" class="btn btn-premium">Dealer Portal</button>
+                    </nav>
+                    
+                    <!-- Mobile Menu Button -->
+                    <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                        <span id="menuIcon">☰</span>
+                    </button>
+                </div>
+            </div>
+        </div>
     </header>
+    
+    <!-- Mobile Menu -->
+    <div id="mobileMenu" class="mobile-menu glass-strong">
+        <a href="#home" onclick="toggleMobileMenu()">Home</a>
+        <a href="#packages" onclick="toggleMobileMenu()">Packages</a>
+        <a href="#technology" onclick="toggleMobileMenu()">Technology</a>
+        <a href="#contact" onclick="toggleMobileMenu()">Contact</a>
+        <button onclick="showLogin(); toggleMobileMenu();" class="btn btn-premium" style="width: 100%; margin-top: 16px;">
+            Dealer Portal
+        </button>
+    </div>
 
-    <section class="hero">
-        <div class="hero-content">
-            <h1>Skorcheart: Journeys of the Soul</h1>
-            <p>An exclusive immersion into realms of profound emotion and transformative experiences.</p>
-        </div>
-    </section>
+    <!-- Main Content -->
+    <div id="mainContent">
+        <!-- Hero Section -->
+        <section id="home" class="hero-gradient" style="min-height: 100vh; display: flex; align-items: center; justify-content: center; padding-top: 80px;">
+            <div class="container" style="text-align: center; position: relative; z-index: 10;">
+                <div class="animate-fadeInUp">
+                    <div class="badge glass" style="margin-bottom: 24px;">
+                        <span style="color: var(--accent-cyan);">⚡</span> Trusted Since 1874 - 145+ Years of Protection
+                    </div>
+                    
+                    <h1 style="font-size: 64px; font-weight: 900; margin-bottom: 24px; line-height: 1.2;">
+                        America's Most<br/>
+                        <span class="gradient-text">Trusted Security</span>
+                    </h1>
+                    
+                    <p style="font-size: 24px; color: #d1d5db; margin-bottom: 32px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                        Professional ADT monitoring with cutting-edge smart home technology.
+                        Protect what matters most with intelligent, 24/7 security.
+                    </p>
+                    
+                    <div style="display: flex; flex-wrap: wrap; gap: 16px; justify-content: center; margin-bottom: 48px;">
+                        <a href="#packages" class="btn btn-premium" style="font-size: 18px;">View Packages</a>
+                        <a href="tel:+14089094484" class="btn btn-secondary" style="font-size: 18px;">📞 (408) 909-4484</a>
+                    </div>
+                    
+                    <!-- Special Offer Banner -->
+                    <div class="glass-strong animate-glow" style="display: inline-block; padding: 24px 32px; border-radius: 16px;">
+                        <div style="font-size: 14px; color: var(--accent-cyan); font-weight: 600; margin-bottom: 4px;">LIMITED TIME OFFER</div>
+                        <div style="font-size: 28px; font-weight: 700;">
+                            $99 Installation + <span style="color: var(--accent-cyan);">FREE HD Camera</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
 
-    <main>
-        <h2 class="section-title">Featured Artist: Skorcheart</h2>
-        <div class="artist-intro">
-            <p>In the hushed sanctuaries of creation, where passion intertwines with perseverance, Skorcheart—known to the enlightened as Ryan Eusantos—stands as a beacon of unyielding devotion. Through decades of tireless exploration, he has navigated the depths of the human spirit, channeling sleepless nights into visions that resonate with the heart's unspoken truths. Emerging from authentic roots, his creations have captivated galleries with their raw sincerity, yet he has turned away fortunes to preserve the sanctity of his expression. In this moment of revelation, Skorcheart extends an invitation to partake in his odyssey, offering pieces that stir the soul for the sheer joy of shared connection. Witness these masterpieces, unveiled in exquisite detail, as they awaken every emotion within and guide you through the eternal journey of existence. Art credits include exhibitions at Pain Sugar Gallery (e.g., Fall Group Show and Kabilang Mundo) and collaborative triumphs like 'Last Goodbye'. Follow more of his work on Instagram at <a href="https://www.instagram.com/skorcheart/" target="_blank">@skorcheart</a>.</p>
-        </div>
-        <div class="articles">
-            <!-- Organized Most Appealing to Least -->
-            <article class="article-card">
-                <img src="https://cdn.myportfolio.com/2b2b96fe-0be2-484a-8fae-ba35481d9a18/baef77d6-7283-40bb-a4fc-28303debc8b4_rwc_1132x1976x1547x1210x1547.jpg?h=28b88459991636d977e335ffaad69fc8" alt="Skorcheart abstract colorful landscape" class="article-img">
-                <div class="article-content">
-                    <h3>Enchanted Strata</h3>
-                    <p class="article-meta">Oil on canvas, dimensions unknown, circa 2021. Courtesy of the artist. No caption – From 'Last Goodbye' exhibition – Link: https://curatedchronicles.com/last-goodbye-x-ryan-eusantos-steve-rubio.</p>
-                    <p>This canvas unfolds layers of joy and serenity, inviting the viewer to traverse paths of renewal and inner harmony, where each hue whispers tales of growth and boundless possibility.</p>
+        <!-- Stats Section -->
+        <section style="padding: 80px 24px; background: linear-gradient(to bottom, transparent, rgba(30, 58, 138, 0.2));">
+            <div class="container">
+                <div class="grid grid-4">
+                    <div class="stat-item">
+                        <div class="stat-number gradient-text">145+</div>
+                        <div class="stat-label">Years of Trust</div>
+                    </div>
+                    <div class="stat-item" style="animation-delay: 0.1s">
+                        <div class="stat-number gradient-text">6</div>
+                        <div class="stat-label">Monitoring Centers</div>
+                    </div>
+                    <div class="stat-item" style="animation-delay: 0.2s">
+                        <div class="stat-number gradient-text">&lt;5s</div>
+                        <div class="stat-label">Response Time</div>
+                    </div>
+                    <div class="stat-item" style="animation-delay: 0.3s">
+                        <div class="stat-number gradient-text">24/7</div>
+                        <div class="stat-label">Protection</div>
+                    </div>
                 </div>
-            </article>
-            <article class="article-card">
-                <img src="https://cdn.myportfolio.com/2b2b96fe-0be2-484a-8fae-ba35481d9a18/4934beeb-e616-4f98-9a25-67f46da93a56_rw_3840.JPG?h=031a906ec4743068c452fb22fc28759c" alt="Skorcheart vibrant abstract" class="article-img">
-                <div class="article-content">
-                    <h3>Chromatic Echoes</h3>
-                    <p class="article-meta">Oil on canvas, dimensions unknown, circa 2021. Courtesy of the artist. No caption – From 'Last Goodbye' exhibition – Link: https://curatedchronicles.com/last-goodbye-x-ryan-eusantos-steve-rubio.</p>
-                    <p>A symphony of vibrancy that stirs exhilaration and wonder, charting a voyage through moments of pure elation and the vibrant pulse of life's unending rhythm.</p>
-                </div>
-            </article>
-            <article class="article-card">
-                <img src="https://cdn.myportfolio.com/2b2b96fe-0be2-484a-8fae-ba35481d9a18/6c1f4441-eea3-4f0b-95b5-60d9a3203d03_rw_3840.JPG?h=69949a18d39be11bfeb5ad1cc8b3fc66" alt="Skorcheart ethereal portrait" class="article-img">
-                <div class="article-content">
-                    <h3>Ethereal Reverie</h3>
-                    <p class="article-meta">Oil on canvas, dimensions unknown, circa 2021. Courtesy of the artist. No caption – From 'Last Goodbye' exhibition – Link: https://curatedchronicles.com/last-goodbye-x-ryan-eusantos-steve-rubio.</p>
-                    <p>This portrait evokes tender vulnerability and quiet strength, leading one on a reflective path of empathy and connection, where emotions surface like gentle waves of understanding.</p>
-                </div>
-            </article>
-            <article class="article-card">
-                <img src="https://cdn.myportfolio.com/2b2b96fe-0be2-484a-8fae-ba35481d9a18/5044b09d-77a5-4873-8d45-1e9c9d7ca0f2_rw_3840.JPG?h=af780f82d9d8aa3d76f7d36bea547c81" alt="Skorcheart gallery portrait" class="article-img">
-                <div class="article-content">
-                    <h3>Whispers of Farewell</h3>
-                    <p class="article-meta">Oil on canvas, dimensions unknown, circa 2021. Courtesy of the artist. No caption – From 'Last Goodbye' exhibition – Link: https://curatedchronicles.com/last-goodbye-x-ryan-eusantos-steve-rubio.</p>
-                    <p>An intimate glimpse that awakens melancholy and hope, guiding through the bittersweet farewell to cherished memories and the embrace of new beginnings.</p>
-                </div>
-            </article>
-            <article class="article-card">
-                <img src="https://cdn.myportfolio.com/2b2b96fe-0be2-484a-8fae-ba35481d9a18/c616bd99-1150-44d8-ab26-f5e30af9273b_rw_1920.jpg?h=a290df91eb4995fd6b1a902e94ee16e0" alt="Skorcheart exhibition poster art" class="article-img">
-                <div class="article-content">
-                    <h3>Last Embrace</h3>
-                    <p class="article-meta">Oil on canvas, dimensions unknown, circa 2021. Courtesy of the artist. No caption – From 'Last Goodbye' exhibition – Link: https://curatedchronicles.com/last-goodbye-x-ryan-eusantos-steve-rubio.</p>
-                    <p>Scenes of warmth and parting that ignite feelings of love and loss, tracing the delicate threads of human bonds and the enduring spirit of affection.</p>
-                </div>
-            </article>
-            <article class="article-card">
-                <img src="https://cdn.myportfolio.com/2b2b96fe-0be2-484a-8fae-ba35481d9a18/6b9f5226-ea8d-43e6-9001-3b3b30385462_rwc_343x835x1081x845x1081.jpg?h=5ad4bb1ff375a8dae58621cf5738152a" alt="Skorcheart abstract installation" class="article-img">
-                <div class="article-content">
-                    <h3>Fragmented Horizons</h3>
-                    <p class="article-meta">Oil on canvas, dimensions unknown, circa 2021. Courtesy of the artist. No caption – From 'Last Goodbye' exhibition – Link: https://curatedchronicles.com/last-goodbye-x-ryan-eusantos-steve-rubio.</p>
-                    <p>Forms that convey fragmentation and unity, embarking on a quest through confusion toward clarity, awakening resilience amid life's shifting landscapes.</p>
-                </div>
-            </article>
-            <article class="article-card">
-                <img src="https://pbs.twimg.com/media/Fe6C4DhWIAA6x60.jpg" alt="Skorcheart landscape artwork" class="article-img">
-                <div class="article-content">
-                    <h3>Neon Metropolis</h3>
-                    <p class="article-meta">Digital illustration, 1920x1080 px, circa 2022. Courtesy of the artist. No caption – Posted circa November 2022 – Link via @skorcheart on X.</p>
-                    <p>This vision stirs a profound sense of mystery and revelation, journeying through shadowed doubts to luminous insights that touch the core of existence.</p>
-                </div>
-            </article>
-            <article class="article-card">
-                <img src="https://pbs.twimg.com/media/FZuuogOXgAEiZGe?format=jpg&name=large" alt="Skorcheart landscape scene" class="article-img">
-                <div class="article-content">
-                    <h3>Epic Landscape</h3>
-                    <p class="article-meta">Digital illustration, 1920x1080 px, circa 2022. Courtesy of the artist. No caption – Posted circa August 2022 – Link via @skorcheart on X.</p>
-                    <p>A panorama that evokes awe and introspection, leading through vast expanses of solitude to moments of profound self-discovery and emotional liberation.</p>
-                </div>
-            </article>
-            <article class="article-card">
-                <img src="https://pbs.twimg.com/media/FcWtZiyaQAAFcPv.jpg" alt="Skorcheart horizon artwork" class="article-img">
-                <div class="article-content">
-                    <h3>Horizon Beyond</h3>
-                    <p class="article-meta">Digital illustration, 1920x1080 px, circa 2022. Courtesy of the artist. No caption – Posted circa September 2022 – Link via @skorcheart on X.</p>
-                    <p>Intensities that summon passion and contemplation, navigating the tides of fervor to serene acceptance in the grand narrative of personal evolution.</p>
-                </div>
-            </article>
-            <article class="article-card">
-                <img src="https://pbs.twimg.com/media/FRm14g5UYAAiYhd.jpg" alt="Skorcheart moon knight artwork" class="article-img">
-                <div class="article-content">
-                    <h3>Moon Knight Studies</h3>
-                    <p class="article-meta">Digital illustration, 1920x1080 px, circa 2022. Courtesy of the artist. Caption: "@moonknight @Marvel @Disney hire me pls" – Posted circa April 2022 – Link via @skorcheart on X.</p>
-                    <p>Sketches that awaken conflict and resolution, traversing inner battles to harmonious peace, revealing the multifaceted layers of the human psyche.</p>
-                </div>
-            </article>
-        </div>
-    </main>
+            </div>
+        </section>
 
-    <footer>
-        <p>&copy; 2025 Art Today! All rights reserved.</p>
-        <div>
-            <a href="#">Instagram</a> |
-            <a href="#">X</a> |
-            <a href="#">Subscribe</a>
-        </div>
-    </footer>
+        <!-- Packages Section -->
+        <section id="packages">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 64px;">
+                    <div class="badge glass" style="margin-bottom: 16px;">
+                        <span style="color: var(--accent-cyan);">🛡️</span> Security Solutions
+                    </div>
+                    <h2 class="section-title">
+                        Choose Your <span class="gradient-text">Protection Level</span>
+                    </h2>
+                    <p class="section-subtitle">
+                        From essential security to complete smart home automation
+                    </p>
+                </div>
 
-    <script>
-        const menuToggle = document.getElementById('menu-toggle');
-        const navMenu = document.getElementById('nav-menu');
-        menuToggle.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
+                <div class="grid grid-3">
+                    <!-- Basic Package -->
+                    <div class="card glass-strong">
+                        <div style="color: var(--accent-cyan); font-size: 14px; font-weight: 700; margin-bottom: 8px;">ESSENTIAL</div>
+                        <h3 style="font-size: 32px; font-weight: 700; margin-bottom: 16px;">Basic Protection</h3>
+                        <div class="price">
+                            $36.99<span class="price-period">/month</span>
+                        </div>
+                        <ul class="feature-list">
+                            <li>
+                                <span class="checkmark">✓</span>
+                                <span>24/7 Professional Monitoring</span>
+                            </li>
+                            <li>
+                                <span class="checkmark">✓</span>
+                                <span>Door & Window Sensors</span>
+                            </li>
+                            <li>
+                                <span class="checkmark">✓</span>
+                                <span>Motion Detection</span>
+                            </li>
+                            <li>
+                                <span class="checkmark">✓</span>
+                                <span>Mobile App Control</span>
+                            </li>
+                            <li>
+                                <span class="checkmark">✓</span>
+                                <span>Battery Backup System</span>
+                            </li>
+                        </ul>
+                        <a href="#contact" class="btn btn-premium" style="width: 100%;">Get Started</a>
+                    </div>
+
+                    <!-- Smart Home Package (Most Popular) -->
+                    <div class="card glass-strong card-popular">
+                        <div style="color: var(--accent-cyan); font-size: 14px; font-weight: 700; margin-bottom: 8px;">RECOMMENDED</div>
+                        <h3 style="font-size: 32px; font-weight: 700; margin-bottom: 16px;">Pulse Smart Home</h3>
+                        <div class="price">
+                            $52.99<span class="price-period">/month</span>
+                        </div>
+                        <ul class="feature-list">
+                            <li>
+                                <span class="checkmark">✓</span>
+                                <span>Everything in Basic</span>
+                            </li>
+                            <li>
+                                <span class="checkmark">✓</span>
+                                <span>HD Video Surveillance</span>
+                            </li>
+                            <li>
+                                <span class="checkmark">✓</span>
+                                <span>Smart Door Locks</span>
+                            </li>
+                            <li>
+                                <span class="checkmark">✓</span>
+                                <span>Smart Thermostat</span>
+                            </li>
+                            <li>
+                                <span class="checkmark">✓</span>
+                                <span>Voice Control Integration</span>
+                            </li>
+                        </ul>
+                        <a href="#contact" class="btn btn-premium" style="width: 100%;">Get Started</a>
+                    </div>
+
+                    <!-- Complete Package -->
+                    <div class="card glass-strong">
+                        <div style="color: var(--accent-cyan); font-size: 14px; font-weight: 700; margin-bottom: 8px;">PREMIUM</div>
+                        <h3 style="font-size: 32px; font-weight: 700; margin-bottom: 16px;">Total Intelligence</h3>
+                        <div class="price">
+                            $64.99<span class="price-period">/month</span>
+                        </div>
+                        <ul class="feature-list">
+                            <li>
+                                <span class="checkmark">✓</span>
+                                <span>Everything in Pulse</span>
+                            </li>
+                            <li>
+                                <span class="checkmark">✓</span>
+                                <span>Multi-Camera System (4+)</span>
+                            </li>
+                            <li>
+                                <span class="checkmark">✓</span>
+                                <span>Advanced AI Detection</span>
+                            </li>
+                            <li>
+                                <span class="checkmark">✓</span>
+                                <span>Priority Support</span>
+                            </li>
+                            <li>
+                                <span class="checkmark">✓</span>
+                                <span>30-Day Cloud Storage</span>
+                            </li>
+                        </ul>
+                        <a href="#contact" class="btn btn-premium" style="width: 100%;">Get Started</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technology Section -->
+        <section id="technology">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 64px;">
+                    <div class="badge glass" style="margin-bottom: 16px;">
+                        <span style="color: var(--accent-cyan);">🔬</span> Innovation
+                    </div>
+                    <h2 class="section-title">
+                        <span class="gradient-text">Next-Gen Technology</span>
+                    </h2>
+                    <p class="section-subtitle">
+                        Powered by artificial intelligence and machine learning
+                    </p>
+                </div>
+
+                <div class="grid grid-3">
+                    <div class="tech-card glass-strong">
+                        <div class="tech-icon">🤖</div>
+                        <h3 class="tech-title">AI-Powered Detection</h3>
+                        <p class="tech-description">
+                            Advanced algorithms distinguish between people, pets, and packages for accurate alerts.
+                        </p>
+                    </div>
+
+                    <div class="tech-card glass-strong">
+                        <div class="tech-icon">📱</div>
+                        <h3 class="tech-title">Smart Control</h3>
+                        <p class="tech-description">
+                            Control your entire security system from anywhere with our intuitive mobile app.
+                        </p>
+                    </div>
+
+                    <div class="tech-card glass-strong">
+                        <div class="tech-icon">🔐</div>
+                        <h3 class="tech-title">Smart Locks</h3>
+                        <p class="tech-description">
+                            Grant access remotely, receive alerts, and never worry about lost keys again.
+                        </p>
+                    </div>
+
+                    <div class="tech-card glass-strong">
+                        <div class="tech-icon">📹</div>
+                        <h3 class="tech-title">4K Video Quality</h3>
+                        <p class="tech-description">
+                            Crystal-clear footage with night vision and 160° field of view.
+                        </p>
+                    </div>
+
+                    <div class="tech-card glass-strong">
+                        <div class="tech-icon">🌡️</div>
+                        <h3 class="tech-title">Climate Control</h3>
+                        <p class="tech-description">
+                            Smart thermostats that learn your preferences and save energy automatically.
+                        </p>
+                    </div>
+
+                    <div class="tech-card glass-strong">
+                        <div class="tech-icon">⚡</div>
+                        <h3 class="tech-title">Instant Alerts</h3>
+                        <p class="tech-description">
+                            Real-time notifications sent directly to your phone the moment activity is detected.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Customer Stats Section -->
+        <section style="padding: 80px 24px; background: linear-gradient(to bottom, transparent, rgba(30, 58, 138, 0.1));">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 64px;">
+                    <div class="badge glass" style="margin-bottom: 16px;">
+                        <span style="color: var(--accent-cyan);">📊</span> Industry Leader
+                    </div>
+                    <h2 class="section-title">
+                        <span class="gradient-text">Protecting Millions</span> Nationwide
+                    </h2>
+                    <p class="section-subtitle">
+                        ADT's massive customer base demonstrates trust and reliability
+                    </p>
+                </div>
+
+                <div class="glass-strong" style="border-radius: 24px; padding: 48px;">
+                    <div class="grid grid-4" style="margin-bottom: 48px;">
+                        <div style="text-align: center; padding: 24px;">
+                            <div style="font-size: 48px; font-weight: 900; color: var(--accent-cyan); margin-bottom: 8px;">6.5M+</div>
+                            <div style="color: #9ca3af; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;">Total Customers</div>
+                        </div>
+                        <div style="text-align: center; padding: 24px;">
+                            <div style="font-size: 48px; font-weight: 900; color: var(--accent-cyan); margin-bottom: 8px;">200K+</div>
+                            <div style="color: #9ca3af; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;">Monthly Activations</div>
+                        </div>
+                        <div style="text-align: center; padding: 24px;">
+                            <div style="font-size: 48px; font-weight: 900; color: var(--accent-cyan); margin-bottom: 8px;">17K+</div>
+                            <div style="color: #9ca3af; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;">Authorized Dealers</div>
+                        </div>
+                        <div style="text-align: center; padding: 24px;">
+                            <div style="font-size: 48px; font-weight: 900; color: var(--accent-cyan); margin-bottom: 8px;">98%</div>
+                            <div style="color: #9ca3af; font-size: 14px; text-transform: uppercase; letter-spacing: 0.05em;">Customer Satisfaction</div>
+                        </div>
+                    </div>
+
+                    <div style="border-top: 1px solid rgba(255, 255, 255, 0.1); padding-top: 32px;">
+                        <h3 style="text-align: center; font-size: 24px; font-weight: 700; margin-bottom: 32px; color: var(--accent-cyan);">
+                            🌎 Regional Customer Distribution (Estimated)
+                        </h3>
+                        <div class="grid grid-2">
+                            <div style="background: rgba(6, 182, 212, 0.1); border-radius: 12px; padding: 24px; border: 1px solid rgba(6, 182, 212, 0.3);">
+                                <h4 style="font-weight: 700; margin-bottom: 16px; color: white;">🏠 Residential Customers</h4>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                    <span style="color: #d1d5db;">Northeast</span>
+                                    <span style="font-weight: 700; color: var(--accent-cyan);">~1.8M</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                    <span style="color: #d1d5db;">Southeast</span>
+                                    <span style="font-weight: 700; color: var(--accent-cyan);">~1.6M</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                    <span style="color: #d1d5db;">Midwest</span>
+                                    <span style="font-weight: 700; color: var(--accent-cyan);">~1.2M</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                    <span style="color: #d1d5db;">West</span>
+                                    <span style="font-weight: 700; color: var(--accent-cyan);">~1.4M</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 12px 0; margin-top: 8px; border-top: 2px solid rgba(6, 182, 212, 0.3); font-weight: 700;">
+                                    <span>Total Residential</span>
+                                    <span style="color: var(--accent-cyan);">~6.0M</span>
+                                </div>
+                            </div>
+
+                            <div style="background: rgba(6, 182, 212, 0.1); border-radius: 12px; padding: 24px; border: 1px solid rgba(6, 182, 212, 0.3);">
+                                <h4 style="font-weight: 700; margin-bottom: 16px; color: white;">🏢 Commercial Customers</h4>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                    <span style="color: #d1d5db;">Small Business</span>
+                                    <span style="font-weight: 700; color: var(--accent-cyan);">~280K</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                    <span style="color: #d1d5db;">Mid-Market</span>
+                                    <span style="font-weight: 700; color: var(--accent-cyan);">~150K</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                    <span style="color: #d1d5db;">Enterprise</span>
+                                    <span style="font-weight: 700; color: var(--accent-cyan);">~70K</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1);">
+                                    <span style="color: #d1d5db;">Government</span>
+                                    <span style="font-weight: 700; color: var(--accent-cyan);">~20K</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; padding: 12px 0; margin-top: 8px; border-top: 2px solid rgba(6, 182, 212, 0.3); font-weight: 700;">
+                                    <span>Total Commercial</span>
+                                    <span style="color: var(--accent-cyan);">~520K</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 32px; padding: 24px; background: rgba(34, 197, 94, 0.1); border-radius: 12px; border: 2px solid rgba(34, 197, 94, 0.3); text-align: center;">
+                            <div style="font-size: 14px; color: #9ca3af; margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em;">Grand Total Estimated Customers</div>
+                            <div style="font-size: 56px; font-weight: 900; background: linear-gradient(135deg, #22c55e, #06b6d4); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">
+                                6.52 Million
+                            </div>
+                            <p style="margin-top: 16px; color: #9ca3af; font-size: 14px;">
+                                *Estimates based on ADT's reported customer base and industry analysis
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Celebrity Testimonials Section -->
+        <section style="padding: 80px 24px; background: linear-gradient(to bottom, rgba(30, 58, 138, 0.1), transparent);">
+            <div class="container">
+                <div style="text-align: center; margin-bottom: 64px;">
+                    <div class="badge glass" style="margin-bottom: 16px;">
+                        <span style="color: var(--accent-cyan);">⭐</span> Celebrity Endorsed
+                    </div>
+                    <h2 class="section-title">
+                        Trusted by <span class="gradient-text">America's Top Stars</span>
+                    </h2>
+                    <p class="section-subtitle">
+                        See why celebrities choose ADT to protect their homes and families
+                    </p>
+                </div>
+
+                <div class="grid grid-2">
+                    <!-- Ving Rhames Video -->
+                    <div class="video-card glass-strong">
+                        <h3 class="video-title">Ving Rhames - Mission Impossible Star</h3>
+                        <div class="video-container">
+                            <iframe> 
+                                src="https://www.youtube.com/embed/xvdkY4rJJYk" 
+                                title="ADT with Ving Rhames" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <p style="margin-top: 16px; color: #9ca3af; font-size: 14px; line-height: 1.6;">
+                            Award-winning actor and longtime ADT spokesperson shares why he trusts ADT for his family's security.
+                        </p>
+                    </div>
+
+                    <!-- Jonathan & Drew Scott Video -->
+                    <div class="video-card glass-strong">
+                        <h3 class="video-title">Property Brothers - HGTV Icons</h3>
+                        <div class="video-container">
+                            <iframe> 
+                                src="https://www.youtube.com/embed/pR9qHeFpOOk" 
+                                title="ADT with Property Brothers" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                        <p style="margin-top: 16px; color: #9ca3af; font-size: 14px; line-height: 1.6;">
+                            Home renovation experts Jonathan and Drew Scott explain why smart home security is essential for every property.
+                        </p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 48px;">
+                    <div class="glass" style="display: inline-block; padding: 24px 48px; border-radius: 16px;">
+                        <p style="font-size: 18px; color: white; font-weight: 600; margin-bottom: 8px;">
+                            Join millions of satisfied customers
+                        </p>
+                        <p style="font-size: 14px; color: #9ca3af;">
+                            Get the same protection trusted by celebrities nationwide
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" style="background: linear-gradient(to bottom, rgba(30, 58, 138, 0.2), transparent);">
+            <div class="container" style="max-width: 900px;">
+                <div class="glass-strong" style="border-radius: 24px; padding: 64px 48px;">
+                    <div style="text-align: center; margin-bottom: 48px;">
+                        <h2 class="section-title">
+                            Get Your <span class="gradient-text">Free Quote</span>
+                        </h2>
+                        <p style="font-size: 20px; color: #9ca3af;">
+                            No obligation consultation with local ADT experts
+                        </p>
+                    </div>
+
+                    <form onsubmit="handleContactSubmit(event)">
+                        <div class="grid grid-2">
+                            <div class="form-group">
+                                <label>Full Name *</label>
+                                <input type="text" required placeholder="John Smith">
+                            </div>
+                            <div class="form-group">
+                                <label>Email *</label>
+                                <input type="email" required placeholder="john@example.com">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-2">
+                            <div class="form-group">
+                                <label>Phone *</label>
+                                <input type="tel" required placeholder="(408) 555-1234">
+                            </div>
+                            <div class="form-group">
+                                <label>Zip Code</label>
+                                <input type="text" placeholder="94513" maxlength="5">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Preferred Package</label>
+                            <select>
+                                <option>Basic Protection - $42.99/mo</option>
+                                <option selected>Pulse Smart Home - $52.99/mo</option>
+                                <option>Total Intelligence - $64.99/mo</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label>Additional Notes</label>
+                            <textarea rows="4" placeholder="Tell us about your security needs..."></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-premium" style="width: 100%; font-size: 18px;">
+                            Request Free Consultation
+                        </button>
+                        
+                        <p style="text-align: center; font-size: 14px; color: #9ca3af; margin-top: 16px;">
+                            We'll contact you within 24 hours
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="footer-grid">
+                    <div>
+                        <h4 class="footer-title">Direct Protection Security</h4>
+                        <p style="font-size: 14px; color: #9ca3af;">
+                            Authorized ADT Dealer<br/>
+                            Protecting homes since 1874
+                        </p>
+                    </div>
+                    <div>
+                        <h4 class="footer-title">Quick Links</h4>
+                        <ul class="footer-links">
+                            <li><a href="#packages">Packages</a></li>
+                            <li><a href="#technology">Technology</a></li>
+                            <li><a href="#contact">Contact</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="footer-title">Resources</h4>
+                        <ul class="footer-links">
+                            <li><a href="https://www.adt.com/about-adt">About ADT</a></li>
+                            <li><a href="https://www.adt.com/help">Support</a></li>
+                            <li><a href="https://www.adt.com/privacy-policy">Privacy</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="footer-title">Contact</h4>
+                        <p style="font-size: 14px; color: #9ca3af;">
+                            📞 (408) 909-4484<br/>
+                            📧 <a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="147d7a727b54707d6671776064667b607177607d7b7a67717761667d606d3a777b79">[email&#160;protected]</a>
+                        </p>
+                    </div>
+                </div>
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Direct Protection Security, Inc. All rights reserved.</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Login Modal -->
+    <div id="loginModal" class="modal">
+        <div class="modal-content glass-strong">
+            <h2 style="font-size: 32px; font-weight: 700; margin-bottom: 24px; text-align: center;">
+                <span class="gradient-text">🔐 Dealer Portal</span>
+            </h2>
+            <div class="form-group">
+                <label>Access Code</label>
+                <input type="password" id="loginPass" placeholder="Enter password" onkeypress="if(event.key==='Enter') login()">
+            </div>
+            <button onclick="login()" class="btn btn-premium" style="width: 100%; margin-bottom: 12px;">
+                Access Dashboard
+            </button>
+            <button onclick="closeLogin()" class="btn" style="width: 100%; background: #4b5563;">
+                Cancel
+            </button>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" style="display: none; min-height: 100vh; padding-top: 80px;">
+        <div class="dashboard-header">
+            <div class="container">
+                <div class="dashboard-header-content">
+                    <div>
+                        <h1 class="dashboard-title">📊 DPS Dealer Commission Calculator</h1>
+                        <p style="color: rgba(255, 255, 255, 0.9);">Complete Product Catalog & Real-time Commission Analysis</p>
+                    </div>
+                    <button onclick="logout()" class="btn" style="background: rgba(255, 255, 255, 0.2);">
+                        ← Logout
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container" style="padding: 24px;">
+            <div class="glass-strong" style="border-radius: 24px; padding: 48px;">
+                
+                <!-- Tabs -->
+                <div class="tabs">
+                    <button class="tab active" onclick="switchTab('calculator')">💰 Commission Calculator</button>
+                    <button class="tab" onclick="switchTab('products')">📦 Full Product Catalog</button>
+                </div>
+
+                <!-- Calculator Tab -->
+                <div id="calculatorTab" class="tab-content active">
+                    <h2 style="font-size: 32px; font-weight: 700; margin-bottom: 24px;">
+                        <span class="gradient-text">💰 Commission Calculator</span>
+                    </h2>
+                    
+                    <div class="grid" style="grid-template-columns: 2fr 1fr; gap: 48px;">
+                        <!-- Input Section -->
+                        <div>
+                            <div class="grid grid-2">
+                                <div class="form-group">
+                                    <label>📦 Package Type</label>
+                                    <select id="pkgType" onchange="calculateCommission()">
+                                        <option value="36.99-1">Res-Basic - $36.99/mo (1x)</option>
+                                        <option value="42.99-1.75" selected>Res-Bundle 2 - $42.99/mo (1.75x)</option>
+                                        <option value="44.99-4">Res-Bundle 2A - $44.99/mo (4x)</option>
+                                        <option value="47.99-4.5">Res-Bundle GSM - $47.99/mo (4.5x)</option>
+                                        <option value="49.99-4">Res-Pulse 1A - $49.99/mo (4x)</option>
+                                        <option value="52.99-4.5">Res-Pulse 1A - $52.99/mo (4.5x)</option>
+                                        <option value="53.99-4.5">Res-Pulse 1B - $53.99/mo (4.5x)</option>
+                                        <option value="58.99-4">Res-Pulse 2A - $58.99/mo (4x)</option>
+                                        <option value="59.99-4">Res-Pulse 3A - $59.99/mo (4x)</option>
+                                        <option value="59.99-4">Res-Pulse 2B - $59.99/mo (4x)</option>
+                                        <option value="60.99-4">Res-Pulse 3B - $60.99/mo (4x)</option>
+                                        <option value="63.99-4">Res-Pulse 2B - $63.99/mo (4x)</option>
+                                        <option value="64.99-4">Res-Pulse 3B - $64.99/mo (4x)</option>
+                                        <option value="39.99-1">Comm-Basic - $39.99/mo (1x)</option>
+                                        <option value="45.99-5">Comm-Bundle 4 - $45.99/mo (5x)</option>
+                                        <option value="51.99-5">Comm-Pulse 1C - $51.99/mo (5x)</option>
+                                        <option value="58.99-5">Comm-Pulse 2C - $58.99/mo (5x)</option>
+                                        <option value="59.99-5">Comm-Pulse 2D - $59.99/mo (5x)</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>💳 Credit Class</label>
+                                    <select id="creditClass" onchange="calculateCommission()">
+                                        <option value="35-36">A+ (775+) - 35/36x</option>
+                                        <option value="34-35">A (725-774) - 34/35x</option>
+                                        <option value="33-34">B (675-724) - 33/34x</option>
+                                        <option value="30-31">B- (650-674) - 30/31x</option>
+                                        <option value="28-29">D (625-649) - 28/29x</option>
+                                        <option value="27-28">E (600-624) - 27/28x</option>
+                                        <option value="24-25">BULK (575-599) - 24/25x</option>
+                                        <option value="28-29">Commercial (>75) - 28/29x</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>💵 Install Fee (Min: $150)</label>
+                                    <input type="number" id="installFee" value="150" min="150" step="10" onchange="calculateCommission()">
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label>📈 Upsell Amount</label>
+                                    <input type="number" id="upsell" value="0" min="0" step="10" onchange="calculateCommission()">
+                                </div>
+                            </div>
+
+                            <!-- Quick Add Equipment -->
+                            <div style="margin-top: 32px;">
+                                <h3 style="font-size: 20px; font-weight: 700; color: var(--accent-cyan); margin-bottom: 16px;">
+                                    🔧 Quick Add Equipment
+                                </h3>
+                                <div class="product-grid" style="grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));">
+                                    <div class="product-item" onclick="addQuickProduct('outCam', 113.32, 50)" style="cursor: pointer;">
+                                        <div class="product-name">📷 Outdoor Camera</div>
+                                        <div class="product-price">$113.32</div>
+                                        <small style="color: #9ca3af; font-size: 11px;">+ $50 labor</small>
+                                        <div style="margin-top: 8px; font-size: 12px; color: var(--accent-cyan);">Click to add</div>
+                                    </div>
+                                    <div class="product-item" onclick="addQuickProduct('inCam', 82.70, 50)" style="cursor: pointer;">
+                                        <div class="product-name">📹 Indoor Camera</div>
+                                        <div class="product-price">$82.70</div>
+                                        <small style="color: #9ca3af; font-size: 11px;">+ $50 labor</small>
+                                        <div style="margin-top: 8px; font-size: 12px; color: var(--accent-cyan);">Click to add</div>
+                                    </div>
+                                    <div class="product-item" onclick="addQuickProduct('lock', 118.88, 35)" style="cursor: pointer;">
+                                        <div class="product-name">🔐 Smart Lock</div>
+                                        <div class="product-price">$118.88</div>
+                                        <small style="color: #9ca3af; font-size: 11px;">+ $35 labor</small>
+                                        <div style="margin-top: 8px; font-size: 12px; color: var(--accent-cyan);">Click to add</div>
+                                    </div>
+                                    <div class="product-item" onclick="addQuickProduct('doorbell', 107.49, 35)" style="cursor: pointer;">
+                                        <div class="product-name">🔔 Doorbell</div>
+                                        <div class="product-price">$107.49</div>
+                                        <small style="color: #9ca3af; font-size: 11px;">+ $35 labor</small>
+                                        <div style="margin-top: 8px; font-size: 12px; color: var(--accent-cyan);">Click to add</div>
+                                    </div>
+                                    <div class="product-item" onclick="addQuickProduct('thermostat', 87.14, 35)" style="cursor: pointer;">
+                                        <div class="product-name">🌡️ Thermostat</div>
+                                        <div class="product-price">$87.14</div>
+                                        <small style="color: #9ca3af; font-size: 11px;">+ $35 labor</small>
+                                        <div style="margin-top: 8px; font-size: 12px; color: var(--accent-cyan);">Click to add</div>
+                                    </div>
+                                </div>
+
+                                <!-- Cart Display -->
+                                <div id="cartDisplay" class="cart-summary" style="margin-top: 24px; display: none;">
+                                    <h4 style="font-weight: 700; margin-bottom: 12px; color: var(--accent-cyan);">🛒 Selected Equipment</h4>
+                                    <div id="cartItems"></div>
+                                    <button onclick="clearCart()" class="btn" style="width: 100%; margin-top: 12px; background: #ef4444; padding: 8px;">
+                                        Clear All
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Results Panel -->
+                        <div>
+                            <div class="result-display">
+                                <div class="result-item">
+                                    <div class="result-label">Monthly Rate</div>
+                                    <div class="result-value" id="rRate">$42.99</div>
+                                </div>
+                                
+                                <div class="result-item">
+                                    <div class="result-label">Pass Through</div>
+                                    <div class="result-value" id="rPass">1.75x</div>
+                                </div>
+                                
+                                <div class="result-item">
+                                    <div class="result-label">Base Multiple</div>
+                                    <div class="result-value" id="rBase">35x</div>
+                                </div>
+                                
+                                <div class="result-item">
+                                    <div class="result-label">Gross Commission</div>
+                                    <div class="result-value" id="rGross">$1,504.65</div>
+                                </div>
+                                
+                                <div class="net-commission">
+                                    <div class="result-label">💰 NET COMMISSION</div>
+                                    <div style="font-size: 40px; font-weight: 700;" id="rNet">$1,090.16</div>
+                                </div>
+
+                                <!-- Expense Breakdown -->
+                                <div class="expense-breakdown">
+                                    <h4 style="font-weight: 700; margin-bottom: 16px;">💼 Expense Breakdown</h4>
+                                    <div class="expense-item">
+                                        <span>DPS Fee:</span>
+                                        <span id="eDps">-$200.00</span>
+                                    </div>
+                                    <div class="expense-item">
+                                        <span>Holdback (1.5x):</span>
+                                        <span id="eHold">-$64.49</span>
+                                    </div>
+                                    <div class="expense-item">
+                                        <span>Equipment:</span>
+                                        <span id="eEquip">-$0.00</span>
+                                    </div>
+                                    <div class="expense-item">
+                                        <span>Labor:</span>
+                                        <span id="eLabor">-$150.00</span>
+                                    </div>
+                                    <div id="laborDetail" style="padding-left: 12px; font-size: 11px; margin-top: 8px; opacity: 0.9;"></div>
+                                    <div class="expense-total">
+                                        <span>Total Expenses:</span>
+                                        <span id="eTotal">-$414.49</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Products Tab -->
+                <div id="productsTab" class="tab-content">
+                    <h2 style="font-size: 32px; font-weight: 700; margin-bottom: 24px;">
+                        <span class="gradient-text">📦 Complete Product Catalog</span>
+                    </h2>
+
+                    <!-- PANELS -->
+                    <div class="product-category">
+                        <h3 class="category-title">Control Panels</h3>
+                        <div class="product-grid">
+                            <div class="product-item">
+                                <div class="product-name">ADT 7" Command Panel Wireless</div>
+                                <div class="product-price">$173.25</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: ADT7AIO-1</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">ADT Hybrid Panel Hardwired</div>
+                                <div class="product-price">$99.75</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: ADTHYBWL-2</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RADIOS -->
+                    <div class="product-category">
+                        <h3 class="category-title">Cellular Radios</h3>
+                        <div class="product-grid">
+                            <div class="product-item">
+                                <div class="product-name">Verizon LTE Radio</div>
+                                <div class="product-price">$52.50</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: ADTLTE-V</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">AT&T LTE Radio</div>
+                                <div class="product-price">$52.50</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: ADTLTE-A</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SENSORS -->
+                    <div class="product-category">
+                        <h3 class="category-title">Sensors & Contacts</h3>
+                        <div class="product-grid">
+                            <div class="product-item">
+                                <div class="product-name">2-Way Mini Wireless Sensor</div>
+                                <div class="product-price">$11.55</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: SIXMINICT</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">2-Way Wireless Sensor</div>
+                                <div class="product-price">$11.24</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: SIXCTA</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">2-Way Wireless Motion Sensor</div>
+                                <div class="product-price">$22.58</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: SIXPIRA</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">2-Way Wireless Keyfob</div>
+                                <div class="product-price">$11.55</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: SIXFOBA</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Hardwired Door Contact</div>
+                                <div class="product-price">$3.36</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: GI-20RSTWH</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Hardwired Window Contact</div>
+                                <div class="product-price">$3.36</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: 0E-2531WGW10</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Rollup Door Sensor</div>
+                                <div class="product-price">$38.75</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: 958</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- GLASS/PANIC/FLOOD -->
+                    <div class="product-category">
+                        <h3 class="category-title">Glass Break, Panic & Flood</h3>
+                        <div class="product-grid">
+                            <div class="product-item">
+                                <div class="product-name">Wireless Glassbreak Sensor</div>
+                                <div class="product-price">$33.60</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: SIXGBA</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Wireless Panic Button</div>
+                                <div class="product-price">$27.00</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: SIXPANICA</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Wireless Flood Sensor</div>
+                                <div class="product-price">$45.00</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: SIXFLOODA</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Wireless Shock Sensor</div>
+                                <div class="product-price">$17.50</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: SIXSHOCKA</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SMOKE & CO -->
+                    <div class="product-category">
+                        <h3 class="category-title">Smoke & Carbon Monoxide</h3>
+                        <div class="product-grid">
+                            <div class="product-item">
+                                <div class="product-name">Wireless Smoke Detector</div>
+                                <div class="product-price">$33.60</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: SIXSMOKEA</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Wireless CO Detector</div>
+                                <div class="product-price">$39.00</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: SIXCOA</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Wireless Smoke & CO Combo</div>
+                                <div class="product-price">$82.00</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: SIXCOMBOA</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TRANSLATORS -->
+                    <div class="product-category">
+                        <h3 class="category-title">Translators</h3>
+                        <div class="product-grid">
+                            <div class="product-item">
+                                <div class="product-name">Wireless to Wireless Translator</div>
+                                <div class="product-price">$50.00</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: ADTCONVERT</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Hardwire to Wireless Translator</div>
+                                <div class="product-price">$52.50</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: SIXC2WA</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- CAMERAS & DOORBELLS -->
+                    <div class="product-category">
+                        <h3 class="category-title">Cameras & Video Doorbells</h3>
+                        <div class="product-grid">
+                            <div class="product-item">
+                                <div class="product-name">Outdoor Camera</div>
+                                <div class="product-price">$113.32</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: OC835V4 | Labor: $50</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Indoor Camera</div>
+                                <div class="product-price">$82.70</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: RC8326-V2 | Labor: $50</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">1080P Outdoor Camera</div>
+                                <div class="product-price">$164.99</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: ADC-V722W | Labor: $50</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">1080P Indoor Camera</div>
+                                <div class="product-price">$117.42</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: ADC-522-IR | Labor: $50</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Video Doorbell</div>
+                                <div class="product-price">$107.49</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: N8-DBC835V2 | Labor: $35</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Ring Doorbell Wireless 2</div>
+                                <div class="product-price">$157.16</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: 7G-8VR1S7OEN | Labor: $35</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Ring Doorbell Chime</div>
+                                <div class="product-price">$48.75</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Accessory</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Ring Chime Pro</div>
+                                <div class="product-price">$61.25</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Accessory</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">WiFi Repeater</div>
+                                <div class="product-price">$47.50</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: W9-WN3000RP-100NAS</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SMART HOME -->
+                    <div class="product-category">
+                        <h3 class="category-title">Smart Home Automation</h3>
+                        <div class="product-grid">
+                            <div class="product-item">
+                                <div class="product-name">Garage Door Control</div>
+                                <div class="product-price">$84.21</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: LN-GD00Z6</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">MyQ Liftmaster Garage</div>
+                                <div class="product-price">$54.21</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: 02-G821LMB</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Z-Wave Lamp Module</div>
+                                <div class="product-price">$31.29</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: JS-28170</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Z-Wave Lightbulb</div>
+                                <div class="product-price">$31.24</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: JS-39723</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Z-Wave Thermostat</div>
+                                <div class="product-price">$87.14</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: NJ-ADCT2000A | Labor: $35</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Z-Wave Dimmer Switch</div>
+                                <div class="product-price">$37.49</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: JS-45712</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SMART LOCKS -->
+                    <div class="product-category">
+                        <h3 class="category-title">Smart Locks</h3>
+                        <div class="product-grid">
+                            <div class="product-item">
+                                <div class="product-name">Kwikset Lock - Bronze</div>
+                                <div class="product-price">$118.88</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: KT-99100079 | Labor: $35</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Kwikset Lock - Gold</div>
+                                <div class="product-price">$118.88</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: KT-99100077 | Labor: $35</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Kwikset Lock - Silver</div>
+                                <div class="product-price">$118.88</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: KT99100078 | Labor: $35</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- KEYPADS -->
+                    <div class="product-category">
+                        <h3 class="category-title">Keypads & Accessories</h3>
+                        <div class="product-grid">
+                            <div class="product-item">
+                                <div class="product-name">7" Secondary Touchscreen</div>
+                                <div class="product-price">$105.00</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: WTS700</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">7" Deskmount Kit</div>
+                                <div class="product-price">$24.99</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: DESKMT-WTS</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">7" Wallmount Kit</div>
+                                <div class="product-price">$27.49</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: WALLMT-WTS</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Command Panel Deskmount</div>
+                                <div class="product-price">$18.74</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: DESKMT-AIO</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Hybrid Hardwired Keypad</div>
+                                <div class="product-price">$40.00</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: WTP100</small>
+                            </div>
+                            <div class="product-item">
+                                <div class="product-name">Wireless Touchpad</div>
+                                <div class="product-price">$62.50</div>
+                                <small style="color: #9ca3af; font-size: 11px;">Model: WLTP100</small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        const PWD = "ADT2025";
+        let cart = {
+            outCam: 0,
+            inCam: 0,
+            lock: 0,
+            doorbell: 0,
+            thermostat: 0
+        };
+        
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const icon = document.getElementById('menuIcon');
+            menu.classList.toggle('active');
+            icon.textContent = menu.classList.contains('active') ? '✕' : '☰';
+        }
+        
+        // Login Functions
+        function showLogin() {
+            document.getElementById('loginModal').classList.add('active');
+            document.getElementById('loginPass').focus();
+        }
+        
+        function closeLogin() {
+            document.getElementById('loginModal').classList.remove('active');
+            document.getElementById('loginPass').value = '';
+        }
+        
+        function login() {
+            if (document.getElementById('loginPass').value === PWD) {
+                document.getElementById('mainContent').style.display = 'none';
+                document.getElementById('header').style.display = 'none';
+                document.getElementById('dashboard').style.display = 'block';
+                closeLogin();
+                calculateCommission();
+            } else {
+                alert('❌ Incorrect password');
+            }
+        }
+        
+        function logout() {
+            document.getElementById('mainContent').style.display = 'block';
+            document.getElementById('header').style.display = 'block';
+            document.getElementById('dashboard').style.display = 'none';
+            window.scrollTo(0, 0);
+        }
+        
+        // Tab Switching
+        function switchTab(tabName) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected tab
+            if (tabName === 'calculator') {
+                document.getElementById('calculatorTab').classList.add('active');
+                document.querySelector('.tab:first-child').classList.add('active');
+            } else if (tabName === 'products') {
+                document.getElementById('productsTab').classList.add('active');
+                document.querySelector('.tab:last-child').classList.add('active');
+            }
+        }
+        
+        // Quick Add Product
+        function addQuickProduct(type, price, labor) {
+            cart[type]++;
+            updateCart();
+            calculateCommission();
+        }
+        
+        // Update Cart Display
+        function updateCart() {
+            const cartDisplay = document.getElementById('cartDisplay');
+            const cartItems = document.getElementById('cartItems');
+            
+            const items = [];
+            if (cart.outCam > 0) items.push({name: 'Outdoor Camera', qty: cart.outCam, price: 113.32, labor: 50});
+            if (cart.inCam > 0) items.push({name: 'Indoor Camera', qty: cart.inCam, price: 82.70, labor: 50});
+            if (cart.lock > 0) items.push({name: 'Smart Lock', qty: cart.lock, price: 118.88, labor: 35});
+            if (cart.doorbell > 0) items.push({name: 'Doorbell', qty: cart.doorbell, price: 107.49, labor: 35});
+            if (cart.thermostat > 0) items.push({name: 'Thermostat', qty: cart.thermostat, price: 87.14, labor: 35});
+            
+            if (items.length === 0) {
+                cartDisplay.style.display = 'none';
+                return;
+            }
+            
+            cartDisplay.style.display = 'block';
+            cartItems.innerHTML = items.map(item => `
+                <div class="cart-item">
+                    <span>${item.name} (×${item.qty})</span>
+                    <span>$${(item.price * item.qty + item.labor * item.qty).toFixed(2)}</span>
+                </div>
+            `).join('');
+        }
+        
+        // Clear Cart
+        function clearCart() {
+            cart = {outCam: 0, inCam: 0, lock: 0, doorbell: 0, thermostat: 0};
+            updateCart();
+            calculateCommission();
+        }
+        
+        // Commission Calculator
+        function calculateCommission() {
+            const pkg = document.getElementById('pkgType')?.value || '42.99-1.75';
+            const [rateStr, passStr] = pkg.split('-');
+            const rate = parseFloat(rateStr);
+            const pass = parseFloat(passStr);
+            
+            const credit = document.getElementById('creditClass')?.value || '35-36';
+            const [base] = credit.split('-').map(Number);
+            
+            const upsell = parseFloat(document.getElementById('upsell')?.value || 0);
+            
+            // Equipment from cart
+            const outCam = cart.outCam;
+            const inCam = cart.inCam;
+            const locks = cart.lock;
+            const doorbells = cart.doorbell;
+            const thermostats = cart.thermostat;
+            
+            // Equipment Costs
+            let equipCost = 0;
+            equipCost += outCam * 113.32;
+            equipCost += inCam * 82.70;
+            equipCost += locks * 118.88;
+            equipCost += doorbells * 107.49;
+            equipCost += thermostats * 87.14;
+            
+            // Labor Costs
+            let labor = 150; // Base install
+            const camLabor = (outCam + inCam) * 50;
+            const lockLabor = locks * 35;
+            const doorLabor = doorbells * 35;
+            const thermoLabor = thermostats * 35;
+            const totalCam = outCam + inCam;
+            
+            labor += camLabor + lockLabor + doorLabor + thermoLabor;
+            
+            // Commission Calculation
+            const gross = rate * base;
+            const dps = 200; // DPS fee
+            const hold = rate * 1.5; // Holdback
+            const total = dps + hold + equipCost + labor;
+            const net = gross - total + upsell;
+            
+            // Update Display
+            if (document.getElementById('rRate')) {
+                document.getElementById('rRate').textContent = `$${rate.toFixed(2)}`;
+                document.getElementById('rPass').textContent = `${pass}x`;
+                document.getElementById('rBase').textContent = `${base}x`;
+                document.getElementById('rGross').textContent = `$${gross.toFixed(2)}`;
+                document.getElementById('rNet').textContent = `$${net.toFixed(2)}`;
+                
+                document.getElementById('eDps').textContent = `-$${dps.toFixed(2)}`;
+                document.getElementById('eHold').textContent = `-$${hold.toFixed(2)}`;
+                document.getElementById('eEquip').textContent = `-$${equipCost.toFixed(2)}`;
+                document.getElementById('eLabor').textContent = `-$${labor.toFixed(2)}`;
+                document.getElementById('eTotal').textContent = `-$${total.toFixed(2)}`;
+                
+                // Labor Detail
+                let detail = '<div style="display: flex; justify-content: space-between; padding: 4px 0;"><span>• Base Install:</span><span>-$150.00</span></div>';
+                if (totalCam > 0) detail += `<div style="display: flex; justify-content: space-between; padding: 4px 0;"><span>• Cameras (${totalCam}×$50):</span><span>-$${camLabor.toFixed(2)}</span></div>`;
+                if (locks > 0) detail += `<div style="display: flex; justify-content: space-between; padding: 4px 0;"><span>• Locks (${locks}×$35):</span><span>-$${lockLabor.toFixed(2)}</span></div>`;
+                if (doorbells > 0) detail += `<div style="display: flex; justify-content: space-between; padding: 4px 0;"><span>• Doorbells (${doorbells}×$35):</span><span>-$${doorLabor.toFixed(2)}</span></div>`;
+                if (thermostats > 0) detail += `<div style="display: flex; justify-content: space-between; padding: 4px 0;"><span>• Thermostats (${thermostats}×$35):</span><span>-$${thermoLabor.toFixed(2)}</span></div>`;
+                document.getElementById('laborDetail').innerHTML = detail;
+            }
+        }
+        
+        // Contact Form Handler
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            alert('✅ Thank you! We will contact you within 24 hours to discuss your security needs.');
+            event.target.reset();
+        }
+        
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
         });
+        
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.getElementById('header');
+            if (window.scrollY > 50) {
+                header.style.background = 'rgba(10, 14, 26, 0.95)';
+            } else {
+                header.style.background = 'transparent';
+            }
+        });
+        
+        // Initialize
+        calculateCommission();
+        
     </script>
 </body>
 </html>
