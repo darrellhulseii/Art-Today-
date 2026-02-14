@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>The Seven Heavenly Virtues - 3D</title>
     <style>
         body { 
@@ -19,13 +21,23 @@
             position: fixed;
             top: 20px;
             left: 20px;
-            background: rgba(0, 0, 0, 0.7);
-            padding: 15px;
+            background: rgba(0, 0, 0, 0.8);
+            padding: clamp(10px, 2vw, 15px);
             border-radius: 5px;
             border: 2px solid #f39c12;
             z-index: 100;
-            font-size: 14px;
+            font-size: clamp(11px, 2vw, 14px);
             line-height: 1.6;
+            max-width: calc(100vw - 40px);
+            box-sizing: border-box;
+        }
+        @media (max-width: 768px) {
+            #hud {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                font-size: 11px;
+            }
         }
         #hud strong { color: #f39c12; }
         #crosshair {
@@ -146,7 +158,7 @@
             border-color: rgba(21, 67, 96, 0.9);
         }
         
-        /* Mobile interaction button */
+        /* Mobile interaction button - only appears in Garden of Eden */
         #mobile-interact-btn {
             position: fixed;
             bottom: 180px;
@@ -157,7 +169,7 @@
             background: radial-gradient(circle, rgba(46, 204, 113, 0.9) 0%, rgba(39, 174, 96, 1) 100%);
             border: 4px solid rgba(34, 153, 84, 0.9);
             border-radius: 50%;
-            display: none;
+            display: none; /* Hidden by default, only shown in Garden */
             align-items: center;
             justify-content: center;
             font-size: 14px;
@@ -167,10 +179,6 @@
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
             z-index: 151;
             pointer-events: all;
-        }
-        
-        @media (max-width: 768px), (pointer: coarse) {
-            #mobile-interact-btn { display: flex; }
         }
         #title-screen {
             position: fixed;
@@ -186,43 +194,50 @@
             z-index: 200;
             padding: 20px;
             text-align: center;
+            box-sizing: border-box;
+            overflow-y: auto;
         }
         #title-screen h1 {
             color: #f39c12;
-            font-size: 36px;
+            font-size: clamp(24px, 6vw, 36px);
             margin-bottom: 10px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
         #title-screen h2 {
             color: #9b59b6;
-            font-size: 20px;
+            font-size: clamp(16px, 4vw, 20px);
             margin-bottom: 30px;
         }
         #verse-display {
-            max-width: 600px;
+            max-width: 90%;
+            width: 600px;
             background: rgba(0, 0, 0, 0.5);
             padding: 20px;
             border-radius: 10px;
             margin-bottom: 30px;
+            max-height: 50vh;
+            overflow-y: auto;
+            box-sizing: border-box;
         }
         #verse-text {
-            font-size: 14px;
+            font-size: clamp(12px, 2.5vw, 14px);
             line-height: 1.6;
             color: #ecf0f1;
             margin-bottom: 10px;
             font-style: italic;
+            text-align: left;
         }
         #verse-ref {
             color: #f39c12;
-            font-size: 12px;
+            font-size: clamp(11px, 2vw, 12px);
             font-weight: bold;
         }
         #start-button {
             background: #2ecc71;
             color: #fff;
             border: none;
-            padding: 15px 40px;
-            font-size: 18px;
+            padding: clamp(12px, 3vw, 15px) clamp(30px, 8vw, 40px);
+            font-size: clamp(16px, 4vw, 18px);
             font-weight: bold;
             border-radius: 10px;
             cursor: pointer;
@@ -243,29 +258,51 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            width: 320px;
+            width: min(320px, calc(100vw - 40px));
             background: linear-gradient(135deg, rgba(0, 0, 40, 0.85) 0%, rgba(20, 20, 60, 0.85) 100%);
-            padding: 15px;
+            padding: clamp(10px, 2vw, 15px);
             display: none;
             z-index: 150;
             border: 2px solid rgba(243, 156, 18, 0.8);
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
             font-family: 'Courier New', monospace;
+            font-size: clamp(10px, 2vw, 12px);
+            box-sizing: border-box;
+        }
+        
+        @media (max-width: 768px) {
+            #battle-ui {
+                bottom: 10px;
+                right: 10px;
+                left: 10px;
+                width: auto;
+            }
         }
         
         #battle-status {
             position: fixed;
             top: 20px;
             left: 20px;
-            width: 280px;
+            width: min(280px, calc(100vw - 40px));
             background: linear-gradient(135deg, rgba(0, 0, 40, 0.75) 0%, rgba(20, 20, 60, 0.75) 100%);
-            padding: 12px;
+            padding: clamp(10px, 2vw, 12px);
             display: none;
             z-index: 150;
             border: 2px solid rgba(46, 204, 113, 0.6);
             border-radius: 8px;
             font-family: 'Courier New', monospace;
+            font-size: clamp(10px, 2vw, 11px);
+            box-sizing: border-box;
+        }
+        
+        @media (max-width: 768px) {
+            #battle-status {
+                top: 10px;
+                left: 10px;
+                right: 10px;
+                width: auto;
+            }
         }
         
         .hero-status {
@@ -299,14 +336,26 @@
             position: fixed;
             top: 20px;
             right: 20px;
-            width: 280px;
+            width: min(280px, calc(100vw - 40px));
             background: linear-gradient(135deg, rgba(40, 0, 0, 0.75) 0%, rgba(60, 20, 20, 0.75) 100%);
-            padding: 12px;
+            padding: clamp(10px, 2vw, 12px);
             display: none;
             z-index: 150;
             border: 2px solid rgba(231, 76, 60, 0.6);
             border-radius: 8px;
             font-family: 'Courier New', monospace;
+            font-size: clamp(10px, 2vw, 11px);
+            box-sizing: border-box;
+        }
+        
+        @media (max-width: 768px) {
+            #enemy-status {
+                top: auto;
+                bottom: 160px;
+                right: 10px;
+                left: 10px;
+                width: auto;
+            }
         }
         
         .enemy-status {
@@ -425,23 +474,30 @@
             justify-content: center;
             z-index: 300;
             padding: 20px;
+            box-sizing: border-box;
         }
         #quote-box {
             background: linear-gradient(135deg, #2c3e50 0%, #1a252f 100%);
             border: 3px solid #f39c12;
             border-radius: 15px;
-            padding: 30px;
-            max-width: 600px;
+            padding: clamp(20px, 4vw, 30px);
+            max-width: 90%;
+            width: 600px;
             max-height: 80vh;
             overflow-y: auto;
             text-align: center;
+            box-sizing: border-box;
+        }
+        #quote-text {
+            font-size: clamp(12px, 2.5vw, 14px);
+            line-height: 1.6;
         }
         #quote-continue {
             background: #f39c12;
             color: #1a252f;
             border: none;
-            padding: 12px 30px;
-            font-size: 16px;
+            padding: clamp(10px, 2.5vw, 12px) clamp(25px, 6vw, 30px);
+            font-size: clamp(14px, 3.5vw, 16px);
             font-weight: bold;
             border-radius: 8px;
             cursor: pointer;
@@ -454,8 +510,10 @@
             left: 50%;
             transform: translate(-50%, -50%);
             color: #f39c12;
-            font-size: 24px;
+            font-size: clamp(18px, 5vw, 24px);
             z-index: 250;
+            text-align: center;
+            padding: 20px;
         }
     </style>
 </head>
@@ -531,10 +589,10 @@
         
         // Bible verses for title screen
         const titleScreenVerses = [
-            { text: "Death has been swallowed up in victory. Where, O death, is your victory? Where, O death, is your sting?", reference: "1 Corinthians 15:54-55" },
-            { text: "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord.", reference: "Romans 6:23" },
-            { text: "He will wipe every tear from their eyes. There will be no more death or mourning or crying or pain.", reference: "Revelation 21:4" },
-            { text: "The last enemy to be destroyed is death. For he has put everything under his feet.", reference: "1 Corinthians 15:26-27" }
+            { text: "No one has ascended into heaven except the one who descended from heaven, the Son of Man. And just as Moses lifted up the serpent in the wilderness, so must the Son of Man be lifted up, that whoever believes in him may have eternal life. For God so loved the world that he gave his only Son, so that everyone who believes in him may not perish but may have eternal life. Indeed, God did not send the Son into the world to condemn the world, but in order that the world might be saved through him. Those who believe in him are not condemned; but those who do not believe are condemned already, because they have not believed in the name of the only Son of God.", reference: "John 3:13-18" },
+            { text: "Death has been swallowed up in victory. Where, O death, is your victory? Where, O death, is your sting? The sting of death is sin, and the power of sin is the law. But thanks be to God, who gives us the victory through our Lord Jesus Christ.", reference: "1 Corinthians 15:54-57" },
+            { text: "For the wages of sin is death, but the gift of God is eternal life in Christ Jesus our Lord. What then are we to say? Should we continue in sin in order that grace may abound? By no means! How can we who died to sin go on living in it?", reference: "Romans 6:23-7:2" },
+            { text: "Then I saw a new heaven and a new earth; for the first heaven and the first earth had passed away, and the sea was no more. And I saw the holy city, the new Jerusalem, coming down out of heaven from God, prepared as a bride adorned for her husband. And I heard a loud voice from the throne saying, 'See, the home of God is among mortals. He will dwell with them; they will be his peoples, and God himself will be with them; he will wipe every tear from their eyes. Death will be no more; mourning and crying and pain will be no more, for the first things have passed away.'", reference: "Revelation 21:1-4" }
         ];
 
         // Vice definitions
@@ -1863,6 +1921,12 @@
         function startBattle(enemy) {
             gameState = 'battle';
             battle.active = true;
+            
+            // Hide mobile interact button during battle
+            if (isMobile) {
+                const interactBtn = document.getElementById('mobile-interact-btn');
+                if (interactBtn) interactBtn.style.display = 'none';
+            }
             
             const isFinalBoss = enemy.vice.name === "The Devil";
             
@@ -3695,8 +3759,8 @@
             gardenCamera.position.z -= dt * 0.8;
             gardenCamera.lookAt(0, 1, jesusModel.position.z - 7);
             
-            // Check for nearby interactables (for mobile button)
-            if (isMobile) {
+            // Check for nearby interactables (for mobile button) - ONLY IN GARDEN
+            if (isMobile && gameState === 'garden') {
                 nearestInteractable = null;
                 let closestDistance = 5; // Max interaction distance
                 
@@ -4089,6 +4153,12 @@
         // Game loop
         function update(dt) {
             if (gameState === 'explore') {
+                // Hide mobile interact button during dungeon exploration
+                if (isMobile) {
+                    const interactBtn = document.getElementById('mobile-interact-btn');
+                    if (interactBtn) interactBtn.style.display = 'none';
+                }
+                
                 // Movement - keyboard and touch
                 const moveSpeed = MOVE_SPEED * dt;
                 const forward = new THREE.Vector3();
@@ -4144,11 +4214,10 @@
                     camera.rotation.y += rotationDiff * 0.1; // Smooth interpolation
                 }
                 
-                // Mobile camera joystick
+                // Mobile camera joystick (horizontal rotation only)
                 if (cameraJoystick.active) {
                     targetRotationY -= cameraJoystick.deltaX * 0.05;
-                    camera.rotation.x -= cameraJoystick.deltaY * 0.02;
-                    camera.rotation.x = Math.max(-Math.PI / 3, Math.min(Math.PI / 3, camera.rotation.x));
+                    // No vertical rotation - removed camera.rotation.x adjustment
                 }
                 
                 // Update light position
