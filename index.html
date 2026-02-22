@@ -5162,20 +5162,51 @@
                 
                 // Create Jesus model at the end of the path
                 jesusModel = createJesusModel();
-                jesusModel.position.set(0, 0, -95);
-                jesusModel.rotation.y = Math.PI;
-                gardenScene.add(jesusModel);
+                if (jesusModel) {
+                    jesusModel.position.set(0, 0, -45);
+                    jesusModel.rotation.y = Math.PI;
+                    gardenScene.add(jesusModel);
+                    console.log('Jesus model created and added to garden');
+                } else {
+                    console.error('Failed to create Jesus model');
+                }
                 
-                // Create player model
-                gardenPlayerModel = createPlayerModel();
-                gardenPlayerModel.position.set(0, 0, 5);
-                gardenPlayerModel.rotation.y = Math.PI;
-                gardenScene.add(gardenPlayerModel);
+                // Create player model for garden exploration
+                try {
+                    gardenPlayerModel = createPlayerModel();
+                    if (!gardenPlayerModel) {
+                        console.error('createPlayerModel returned null/undefined');
+                        // Create fallback simple player model
+                        const fallbackGeometry = new THREE.BoxGeometry(0.6, 1.8, 0.6);
+                        const fallbackMaterial = new THREE.MeshStandardMaterial({ color: 0x2c3e50 });
+                        gardenPlayerModel = new THREE.Mesh(fallbackGeometry, fallbackMaterial);
+                        console.log('Using fallback player model');
+                    }
+                    gardenPlayerModel.position.set(0, 0, 5);
+                    gardenPlayerModel.rotation.y = Math.PI;
+                    gardenScene.add(gardenPlayerModel);
+                    console.log('Garden player model created at position:', gardenPlayerModel.position);
+                } catch (error) {
+                    console.error('Error creating garden player model:', error);
+                    // Create emergency fallback
+                    const fallbackGeometry = new THREE.BoxGeometry(0.6, 1.8, 0.6);
+                    const fallbackMaterial = new THREE.MeshStandardMaterial({ color: 0xff0000 });
+                    gardenPlayerModel = new THREE.Mesh(fallbackGeometry, fallbackMaterial);
+                    gardenPlayerModel.position.set(0, 0, 5);
+                    gardenScene.add(gardenPlayerModel);
+                    console.log('Using emergency fallback player model');
+                }
                 
-                // Camera setup
+                // Camera setup for third-person view
                 gardenCamera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-                gardenCamera.position.set(0, 2.5, 10);
+                gardenCamera.position.set(0, 3, 9);
                 gardenCamera.lookAt(0, 1, 5);
+                console.log('Garden camera created and positioned');
+                
+                console.log('Garden of Eden created successfully');
+                console.log('gameState:', gameState);
+                console.log('gardenPlayerModel exists:', !!gardenPlayerModel);
+                console.log('gardenCamera exists:', !!gardenCamera);
                 
                 // Show victory message
                 showVictoryMessage();
@@ -6261,19 +6292,51 @@
         }
 
         function startGardenWalk() {
+            console.log('startGardenWalk called');
+            console.log('  gameState:', gameState);
+            console.log('  gardenPlayerModel:', !!gardenPlayerModel);
+            console.log('  gardenCamera:', !!gardenCamera);
+            console.log('  gardenScene:', !!gardenScene);
+            
             gardenWalkProgress = 0;
             enableGardenInteraction();
-            // Garden walk will be animated in the update loop
+            
+            // Ensure gameState is set to 'garden' for movement
+            gameState = 'garden';
+            console.log('Garden walk started - you can now explore with WASD keys!');
+            
+            // Update controls display
+            const controlsEl = document.getElementById('controls');
+            if (controlsEl) {
+                controlsEl.innerHTML = '<strong>WASD:</strong> Move | <strong>Mouse:</strong> Look around | <strong>Click:</strong> Interact with objects | <strong>Explore the Garden of Eden!</strong>';
+                controlsEl.style.display = 'block';
+            }
+            
+            // Show on-screen message to player
+            showMessage('✨ Garden of Eden is now explorable! Use WASD to move, click objects to interact ✨', 5000);
         }
 
         function updateGardenWalk(dt) {
-            if (gameState !== 'garden' || !gardenScene || !gardenCamera) return;
+            if (gameState !== 'garden' || !gardenScene || !gardenCamera) {
+                // Debug logging
+                if (gameState === 'garden' && (!gardenScene || !gardenCamera)) {
+                    console.warn('Garden state but missing scene/camera:', {
+                        gameState,
+                        hasGardenScene: !!gardenScene,
+                        hasGardenCamera: !!gardenCamera
+                    });
+                }
+                return;
+            }
             
             // Use the stored garden player model
-            if (!gardenPlayerModel) return;
+            if (!gardenPlayerModel) {
+                console.warn('Garden player model is missing - cannot move');
+                return;
+            }
             
             // FREE ROAM MOVEMENT - WASD controls (use pre-allocated vectors)
-            const moveSpeed = 0.1;
+            const moveSpeed = 0.15;  // Increased from 0.1 for better responsiveness
             gardenCamera.getWorldDirection(_fwd);
             _fwd.y = 0;
             _fwd.normalize();
@@ -6319,14 +6382,11 @@
                 gardenPlayerModel.rotation.y = Math.atan2(_moveDir.x, _moveDir.z);
             }
             
-            // Keep Jesus model in place if it exists
-            if (jesusModel) {
-                jesusModel.position.set(0, 0, -5);
-                jesusModel.rotation.y = Math.PI;
-            }
+            // Jesus stays at the far end - DON'T reset position every frame
+            // (Jesus position is set once during creation)
             
             // Camera follows player in third-person
-            const cameraDistance = 4;
+            const cameraDistance = 5;
             const cameraHeight = 3;
             const targetCameraX = gardenPlayerModel.position.x - Math.sin(gardenCamera.rotation.y) * cameraDistance;
             const targetCameraZ = gardenPlayerModel.position.z - Math.cos(gardenCamera.rotation.y) * cameraDistance;
@@ -6336,7 +6396,7 @@
             gardenCamera.position.z = targetCameraZ;
             gardenCamera.lookAt(gardenPlayerModel.position.x, gardenPlayerModel.position.y + 1, gardenPlayerModel.position.z);
             
-            // Mobile camera rotation
+            // Mouse camera rotation for desktop
             if (cameraJoystick.active) {
                 gardenCamera.rotation.y -= cameraJoystick.deltaX * 0.05;
             }
@@ -6358,11 +6418,13 @@
                 
                 // Show/hide interact button based on proximity
                 const interactBtn = document.getElementById('mobile-interact-btn');
-                if (nearestInteractable) {
-                    interactBtn.style.display = 'flex';
-                    interactBtn.textContent = 'INTERACT';
-                } else {
-                    interactBtn.style.display = 'none';
+                if (interactBtn) {
+                    if (nearestInteractable) {
+                        interactBtn.style.display = 'flex';
+                        interactBtn.textContent = 'INTERACT';
+                    } else {
+                        interactBtn.style.display = 'none';
+                    }
                 }
             }
         }
@@ -6834,9 +6896,15 @@
         }
 
         function onMouseMove(e) {
-            if (isPointerLocked && gameState === 'explore') {
-                mouseX = e.movementX || 0;
-                mouseY = e.movementY || 0;
+            if (isPointerLocked) {
+                if (gameState === 'explore') {
+                    mouseX = e.movementX || 0;
+                    mouseY = e.movementY || 0;
+                } else if (gameState === 'garden' && gardenCamera) {
+                    // Rotate garden camera with mouse
+                    const sensitivity = 0.002;
+                    gardenCamera.rotation.y -= (e.movementX || 0) * sensitivity;
+                }
             }
         }
 
@@ -6850,6 +6918,9 @@
                 // Left side = rotate left, right side = rotate right
                 const rotationAmount = x * Math.PI / 4; // Max 45 degrees per click
                 targetRotationY -= rotationAmount; // Subtract to rotate correctly
+            } else if (gameState === 'garden') {
+                // Handle garden object clicks
+                onGardenClick(e);
             }
         }
 
