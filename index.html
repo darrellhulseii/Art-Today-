@@ -1,6 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
+<html><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -863,33 +861,33 @@
     </script>
 </head>
 <body>
-    <div id="fps-counter">FPS: 0</div>
-    <div id="loading">Loading 3D World...</div>
+    <div id="fps-counter">FPS: 3</div>
+    <div id="loading" style="display: none;">Loading 3D World...</div>
     
-    <div id="title-screen">
+    <div id="title-screen" style="display: none;">
         <h1>THE SEVEN HEAVENLY VIRTUES</h1>
-        <h2>Battle Against Sin & Death - 3D Edition</h2>
+        <h2>Battle Against Sin &amp; Death - 3D Edition</h2>
         <div id="verse-display">
-            <div id="verse-text"></div>
-            <div id="verse-ref"></div>
+            <div id="verse-text">No one has ascended into heaven except the one who descended from heaven, the Son of Man. And just as Moses lifted up the serpent in the wilderness, so must the Son of Man be lifted up, that whoever believes in him may have eternal life. For God so loved the world that he gave his only Son, so that everyone who believes in him may not perish but may have eternal life. Indeed, God did not send the Son into the world to condemn the world, but in order that the world might be saved through him. Those who believe in him are not condemned; but those who do not believe are condemned already, because they have not believed in the name of the only Son of God.</div>
+            <div id="verse-ref">— John 3:13-18</div>
         </div>
         <button id="start-button">Enter the Dungeon</button>
     </div>
 
-    <div id="canvas-container"></div>
+    <div id="canvas-container"><canvas width="390" height="670" style="display: block; width: 390px; height: 670px;"></canvas></div>
     
     <div id="crosshair"></div>
     
-    <div id="hud">
+    <div id="hud" style="display: block;">
         <div><strong>Level:</strong> <span id="level">1</span></div>
         <div><strong>Sins Defeated:</strong> <span id="sins">0</span>/7</div>
         <div><strong>Virtues:</strong> <span id="virtues">0</span>/7</div>
         <div><strong>Divine Elixirs:</strong> <span id="elixirs">0</span></div>
-        <div><strong>Gold:</strong> <span id="gold">0</span></div>
+        <div><strong>Gold:</strong> <span id="gold">162</span></div>
         <div id="trinity-hud" style="display:none;color:#ffd700;"><strong>✝ Trinity:</strong> Unlocked</div>
     </div>
 
-    <div id="message"></div>
+    <div id="message" style="display: none;">📿 Rosary! +3 ATK to all heroes!</div>
     
     <div id="controls">
         <strong>WASD:</strong> Move | <strong>Click:</strong> Rotate camera | <strong>Walk into enemies to battle</strong> | <strong>E:</strong> Open Shop (near merchant)
@@ -899,30 +897,98 @@
     <div id="mobile-controls">
         <div id="movement-joystick" class="mobile-joystick">
             <div class="joystick-base"></div>
-            <div class="joystick-stick"></div>
+            <div class="joystick-stick" style="transform: translate(-50%, -50%);"></div>
         </div>
         <div id="camera-joystick" class="mobile-joystick">
             <div class="joystick-base"></div>
-            <div class="joystick-stick"></div>
+            <div class="joystick-stick" style="transform: translate(-50%, -50%);"></div>
         </div>
     </div>
     
-    <button id="mobile-interact-btn">INTERACT</button>
+    <button id="mobile-interact-btn" style="display: none;">INTERACT</button>
     <div id="fullscreen-btn" title="Toggle Fullscreen (F11)">⛶</div>
 
-    <div id="battle-status"></div>
-    <div id="enemy-status"></div>
+    <div id="battle-status" style="display: flex; flex-direction: row; gap: 6px;"><div class="hero-status">
+                    <span class="hero-name">St. Vincent</span>
+                    <span class="stat-bar-container hp-bar">
+                        <span class="stat-label">HP</span>
+                        <span class="stat-bar">
+                            <span class="stat-bar-fill" style="width: 100%;"></span>
+                        </span>
+                        <span class="stat-value">180/180</span>
+                    </span>
+                    <span class="stat-bar-container mp-bar">
+                        <span class="stat-label">MP</span>
+                        <span class="stat-bar">
+                            <span class="stat-bar-fill" style="width: 100%;"></span>
+                        </span>
+                        <span class="stat-value">30/30</span>
+                    </span>
+                </div><div class="hero-status active">
+                    <span class="hero-name">St. Michael</span>
+                    <span class="stat-bar-container hp-bar">
+                        <span class="stat-label">HP</span>
+                        <span class="stat-bar">
+                            <span class="stat-bar-fill" style="width: 100%;"></span>
+                        </span>
+                        <span class="stat-value">200/200</span>
+                    </span>
+                    <span class="stat-bar-container mp-bar">
+                        <span class="stat-label">MP</span>
+                        <span class="stat-bar">
+                            <span class="stat-bar-fill" style="width: 100%;"></span>
+                        </span>
+                        <span class="stat-value">25/25</span>
+                    </span>
+                </div><div class="hero-status">
+                    <span class="hero-name">St. Joan</span>
+                    <span class="stat-bar-container hp-bar">
+                        <span class="stat-label">HP</span>
+                        <span class="stat-bar">
+                            <span class="stat-bar-fill" style="width: 100%;"></span>
+                        </span>
+                        <span class="stat-value">190/190</span>
+                    </span>
+                    <span class="stat-bar-container mp-bar">
+                        <span class="stat-label">MP</span>
+                        <span class="stat-bar">
+                            <span class="stat-bar-fill" style="width: 100%;"></span>
+                        </span>
+                        <span class="stat-value">35/35</span>
+                    </span>
+                </div></div>
+    <div id="enemy-status" style="display: block;"></div>
     
-    <div id="battle-ui">
+    <div id="battle-ui" style="display: block;">
         <div id="battle-log"></div>
-        <div class="battle-actions" id="battle-actions"></div>
+        <div class="battle-actions" id="battle-actions">
+                    <button class="battle-btn selected" onclick="selectBattleAction('attack')">Attack</button>
+                    <button class="battle-btn" onclick="selectBattleAction('special')">Heavenly Host (20 MP)</button>
+                    <button class="battle-btn" onclick="selectBattleAction('prayer')">Litany of the Saints (10 MP)</button>
+                    
+                    <button class="battle-btn" onclick="selectBattleAction('item')">Item</button>
+                    <button class="battle-btn" onclick="selectBattleAction('flee')">Flee</button>
+                </div>
     </div>
 
-    <div id="quote-overlay">
+    <div id="quote-overlay" style="display: none;">
         <div id="quote-box">
-            <div id="quote-text"></div>
+            <div id="quote-text">
+                <div style="color: #e74c3c; font-size: 20px; font-weight: bold; margin-bottom: 12px;">
+                    Vampire Defeated!
+                </div>
+                <div style="color: #ecf0f1; font-size: 13px; line-height: 1.5; text-align: left; margin-bottom: 15px;">
+                    An undead bloodsucker that haunts the night
+                </div>
+                <div style="color: #3498db; font-size: 12px; font-style: italic; line-height: 1.4; text-align: left; margin-bottom: 8px;">
+                    "For the life of a creature is in the blood, and I have given it to you to make atonement for yourselves on the altar; it is the blood that makes atonement for one's life."
+                </div>
+                <div style="color: #f39c12; font-size: 11px; font-weight: bold;">
+                    — Leviticus 17:11
+                </div>
+            </div>
             <div id="quote-author"></div>
-            <button id="quote-continue">Continue Quest</button>
+            <button id="quote-continue">Continue</button>
         </div>
     </div>
 
@@ -3942,7 +4008,7 @@
                 
                 for (let i = 0; i < heroModels.length; i++) {
                     const heroModel = heroModels[i];
-                    heroModel.position.set(-5, 0, -3 + i * 2);
+                    heroModel.position.set(-2.5, 0, -3 + i * 2); // Much closer! Was -5
                     heroModel.rotation.y = Math.PI / 6; // Face right slightly
                     heroModel.castShadow = true;
                     battleScene.add(heroModel);
@@ -3995,7 +4061,7 @@
                     enemyModel = new THREE.Mesh(fallbackGeometry, fallbackMaterial);
                 }
                 
-                enemyModel.position.set(5, 0, -1 + i * 2);
+                enemyModel.position.set(2.5, 0, -1 + i * 2); // Much closer! Was 5
                 enemyModel.rotation.y = -Math.PI / 6; // Face left slightly
                 enemyModel.castShadow = true;
                 
@@ -4008,9 +4074,9 @@
                 battleEnemyModels.push(enemyModel);
             }
             
-            // Battle camera setup with dynamic positioning
+            // Battle camera setup with dynamic positioning - CLOSER for intense combat!
             battleCamera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
-            battleCamera.position.set(0, 4, 10);
+            battleCamera.position.set(0, 3.5, 7); // Closer and lower! Was (0, 4, 10)
             battleCamera.lookAt(0, 1, 0);
             
             // Store original camera position for animations
@@ -4046,32 +4112,32 @@
             battleCamera.lookAt(0, 1, 0);
         }
 
-        // Focus camera on hero during their turn
+        // Focus camera on hero during their turn - ADJUSTED for closer combat
         function focusCameraOnHero(index) {
             if (!battleCamera || !battleHeroModels[index]) return;
             const hero = battleHeroModels[index];
             battleCamera.userData.targetPosition = new THREE.Vector3(
-                hero.position.x + 2,
+                hero.position.x + 1.5, // Closer offset! Was +2
                 3,
-                hero.position.z + 6
+                hero.position.z + 5 // Closer! Was +6
             );
         }
 
-        // Focus camera on enemy during attack
+        // Focus camera on enemy during attack - ADJUSTED for closer combat
         function focusCameraOnEnemy(index) {
             if (!battleCamera || !battleEnemyModels[index]) return;
             const enemy = battleEnemyModels[index];
             battleCamera.userData.targetPosition = new THREE.Vector3(
-                enemy.position.x - 2,
+                enemy.position.x - 1.5, // Closer offset! Was -2
                 3,
-                enemy.position.z + 6
+                enemy.position.z + 5 // Closer! Was +6
             );
         }
 
-        // Reset camera to default battle view
+        // Reset camera to default battle view - ADJUSTED for closer combat
         function resetBattleCamera() {
             if (!battleCamera) return;
-            battleCamera.userData.targetPosition = new THREE.Vector3(0, 4, 10);
+            battleCamera.userData.targetPosition = new THREE.Vector3(0, 3.5, 7); // Match new camera position!
         }
 
         function disposeBattleScene() {
@@ -7556,5 +7622,6 @@
             }
         }
     </script>
-</body>
-</html>
+
+
+</body></html>
